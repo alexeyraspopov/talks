@@ -14,6 +14,948 @@
 		<p>Алексей Распопов</p>
 	</header>
 
+	<section class="slide shout" id="frontpage">
+		<div>
+			<h2><span class="next">ECMA</span>Script <span class="next">6</span></h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Предупреждение</h2>
+			<p>Будет много страшного и непонятного кода</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>История</h2>
+
+			<ul>
+				<li class="next">1995 &mdash; рождение JavaScript (Mocha)</li>
+				<li class="next">1999 &mdash; стандарт ECMAScript</li>
+				<li class="next">2005 &mdash; 3-е издание стандарта</li>
+				<li class="next">2009 &mdash; 5-е издание</li>
+				<li class="next">2014 &mdash; ES6 Harmony</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>ECMAScript 6</h2>
+
+			<ul>
+				<li>Кодовое имя "Harmony"</li>
+				<li class="next">Серьезное обновление, без сохранения обратной совместимости</li>
+				<li class="next">Стандарт придет к нам в 2014 году</li>
+				<li class="next">+ какое-то время для внедрения браузерами</li>
+				<li class="next">Избавит нас от боли</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2>Что нового?</h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Методы</h2>
+
+			<ul>
+				<li class="next"><strong>String</strong>: contains, startsWith, endsWith, repeat</li>
+				<li class="next"><strong>Object</strong>: is, assing, mixin, getOwnPropertyDescriptors, getPropertyDescriptor, getPropertyNames, setPrototypeOf</li>
+				<li class="next"><strong>Array</strong>: from, of, find, findIndex, fill</li>
+				<li class="next">... и много другого</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Забудем боль</h2>
+
+			<pre>
+				<code class="next">var blocks = document.querySelectorAll('div');</code>
+				<div class="next">
+					<code>//es5</code>
+					<code><mark>Array.prototype.slice.call</mark>(blocks);</code>
+				</div>
+				<div class="next">
+					<code>//es6</code>
+					<code>Array.<mark>from</mark>(blocks);</code>
+				</div>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Научимся склеивать</h2>
+
+			<pre>
+				<code>Object.<mark>mixin</mark>({ a: 1, b: 2 }, { b: 3, c: 4 })</code>
+				<code class="next">// { a: 1, b: 3, c: 4 }</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Перестанем страдать ерундой</h2>
+
+			<pre>
+				<code>var numbers = [1, 3, 8, 7, 9, 13];</code>
+				<div class="next">
+					<code>numbers.<mark>find</mark>(function(n){</code>
+					<code>    return n / 2 === 4;</code>
+					<code>});</code>
+				</div>
+				<code class="next">// 8</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2>Структуры</h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Set</h2>
+
+			<p>Набор уникальных элементов</p>
+
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Set</h2>
+
+			<pre>
+				<code>var data = new <mark>Set</mark>([1, 2, 4]);</code>
+				<code class="next">data.<mark>add</mark>(4);</code>
+				<code class="next">data.<mark>has</mark>(4); // true</code>
+			</pre>
+
+			<pre>
+				<code class="next">data.<mark>delete</mark>(4);</code>
+				<code class="next">data.has(4); // false</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Map</h2>
+
+			<p>Ассоциативный массив</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Map</h2>
+
+			<pre>
+				<code>var data = new <mark>Map</mark>();</code>
+				<code class="next">data.<mark>set</mark>('key', 13);</code>
+				<code class="next">data.set(56, 'text');</code>
+				<code class="next">data.<mark>has</mark>(56); // true</code>
+				<code class="next">data.<mark>get</mark>('key'); // 13</code>
+				<code class="next">data.<mark>delete</mark>(56);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>WeakMap</h2>
+
+			<p>Та же <code>Map</code> только ключами могут быть объекты</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>WeakMap</h2>
+
+			<pre>
+				<code>var data = new <mark>WeakMap</mark>();</code>
+				<code class="next">var element = document.querySelector('header');</code>
+				<div class="next">
+					<code> </code>
+					<code>data.set(element, 'something');</code>
+				</div>
+				<code class="next">data.has(element); // true</code>
+				<div class="next">
+					<code> </code>
+					<code>// любым образом удалим объект</code>
+				</div>
+				<code class="next">data.has(element); // false</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2>Операторы</h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>let</h2>
+
+			<ul>
+				<li>Оператор блочной области видимости</li>
+				<li>Давно все ждали</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>let</h2>
+
+			<pre>
+				<code>var name = 'Kate';</code>
+				<div class="next">
+					<code> </code>
+					<code>if (true) {</code>
+					<code class="next">  <mark>let</mark> name = 'Mike';</code>
+					<code class="next">  alert(name); // <mark class="important">Mike</mark></code>
+				</div>
+				<div class="next">
+					<code>}</code>
+					<code> </code>
+					<code>alert(name); // <mark class="important">Kate</mark></code>
+				</div>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>const</h2>
+
+			<p>Константы</p>
+
+			<p class="next">Блочная область видимости (по аналогии с <code>let</code>)</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>const</h2>
+
+			<pre>
+				<code><mark>const</mark> A = 13;</code>
+				<code class="next">A = false; // SyntaxError</code>
+				<code class="next">var A = 'text'; // SyntaxError</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>for..of</h2>
+
+			<p>Цикл перебора <em>значений</em></p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>for..of</h2>
+
+			<pre>
+				<code>var array = ['a', 'b', 'c'];</code>
+			</pre>
+
+			<pre class="next">
+				<code>for(item <mark>in</mark> array){</code>
+				<code>    console.log(item); <span class="next">// <mark class="important">0, 1, 2</mark></span></code>
+				<code>}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>for..of</h2>
+
+			<pre>
+				<code>var array = ['a', 'b', 'c'];</code>
+			</pre>
+
+			<pre class="next">
+				<code>for(item <mark>of</mark> array){</code>
+				<code>    console.log(item); <span class="next">// <mark class="important">'a', 'b', 'c'</mark></span></code>
+				<code>}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Распространение (spread operator)</h2>
+
+			<pre>
+				<code class="next">var girls = ['Kate', 'Lisa', 'Scarlett'];</code>
+				<code class="next">var invited = ['John', <mark>...girls</mark>, 'Mike'];</code>
+				<code class="next">// ['John', 'Kate', 'Lisa', 'Scarlett', 'Mike']</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Rest parameter</h2>
+
+			<pre class="next">
+				<code>function todo(action, <mark>...items</mark>){</code>
+				<code>    console.log(<mark>items</mark>);</code>
+				<code>}</code>
+			</pre>
+
+			<pre class="next">
+				<code>todo('buy', 'milk', 'bread', 'snickers')</code>
+				<code>// ['milk', 'bread', 'snickers']</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>У массива нет метода unique? Напишем</h2>
+
+			<pre class="next">
+				<code>var data = [1, 3, 4, 4, 6, 8, 1];</code>
+			</pre>
+
+			<pre class="next">
+				<code>var unique = [<mark>...new Set(data)</mark>];</code>
+				<code>// [1, 3, 4, 6, 8]</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2>Магия</h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Бывают такие ситуации</h2>
+
+			<pre class="next">
+				<code>name = 'Scarlett';</code>
+				<code>age = 29;</code>
+			</pre>
+
+			<pre class="next">
+				<code>girl = { name: name, age: age };</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Shorthand (упрощенная запись)</h2>
+
+			<pre class="next">
+				<code>name = 'Scarlett';</code>
+				<code>age = 29;</code>
+			</pre>
+
+			<pre class="next">
+				<code>girl = <mark>{ name, age }</mark>;</code>
+				<code class="next">// { name: 'Scarlett', age: 29 }</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Разделение (destructuring)</h2>
+
+			<pre>
+				<code class="next">var data = { a: 1, b: 2, c: 3 };</code>
+				<code class="next">var <mark>{ a, b }</mark> = data;</code>
+				<code class="next">// a = 1, b = 2</code>
+			</pre>
+
+			<pre class="next">
+				<code>var { parse, stringify } = JSON;</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Array destructuring</h2>
+
+			<pre>
+				<code class="next">var data = [1, 2];</code>
+				<code class="next">var <mark>[a, b]</mark> = data;</code>
+			</pre>
+
+			<pre class="next">
+				<code>// es6 swap vars</code>
+				<code>var a = 1, b = 2;</code>
+				<code class="next">[a, b] = [b, a];</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Всем известна ситуация</h2>
+
+			<pre>
+				<code class="next">function create(options){</code>
+				<code class="next">    options = options || {};</code>
+				<div class="next">
+					<code>    ...</code>
+					<code>}</code>
+				</div>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Привет, параметры по умолчанию</h2>
+
+			<pre>
+				<code>function create(<mark>options = {}</mark>){</code>
+				<code>    ...</code>
+				<code>}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Параметры и деструктуризация</h2>
+
+			<pre class="next">
+				<code>function a(<mark>{name, age}</mark>){</code>
+				<code>    console.log(name, age);</code>
+				<code>}</code>
+			</pre>
+
+			<pre class="next">
+				<code>a({ name: 'Kate', age: 20 });</code>
+				<code>// Kate, 20</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>То же самое в массивах</h2>
+
+			<pre class="next">
+				<code>function a(<mark>[first, second]</mark>){</code>
+				<code>    return first + second;</code>
+				<code>}</code>
+			</pre>
+
+			<pre class="next">
+				<code>a([1, 2]);</code>
+				<code>// 3</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>+ параметры по умолчанию!</h2>
+
+			<pre class="next">
+				<code>function a(<mark>{name, age = 30}</mark>){</code>
+				<code>    console.log(name, age);</code>
+				<code>}</code>
+			</pre>
+
+			<pre class="next">
+				<code>a({ name: 'Kate' });</code>
+				<code>// Kate, 30</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Функции</h2>
+
+			<pre>
+				<code>[1, 2, 3, 4].reduce(function(a, b){</code>
+				<code>    return a + b;</code>
+				<code>});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Функции со стрелой</h2>
+
+			<pre>
+				<code>[1, 2, 3, 4].reduce(<mark>(a, b) => a + b</mark>);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Функции со стрелой</h2>
+
+			<p class="next">Сохраняют контекст</p>
+
+			<pre class="next">
+				<code>element.addEventListener('click', () => console.log(this));</code>
+				<code>// window, не element</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Функции со стрелой</h2>
+
+			<p>Позволяют описывать блоки кода</p>
+
+			<pre>
+				<code>var arrow = (a, b) => <mark>{</mark></code>
+				<code>    ...</code>
+				<code>    return a + b;</code>
+				<code><mark>}</mark></code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Генерация массивов</h2>
+
+			<pre>
+				<code class="next">[1, 2, 3].map(function(n){</code>
+				<code class="next">    return n * n;</code>
+				<code class="next">}).reduce(function(a, b){</code>
+				<code class="next">    return a + b;</code>
+				<code class="next">});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Упрощаем</h2>
+
+			<pre>
+				<code class="next">[1, 2, 3]</code>
+				<code class="next">    .map((n) => n * n)</code>
+				<code class="next">    .reduce((a, b) => a + b)</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>ES6 генерация массивов (comprehension)</h2>
+
+			<pre>
+				<code>array = [1, 2, 3];</code>
+				<code>[<mark>for (n of array) n * n</mark>].reduce((a, b) => a + b)</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Observers</h2>
+
+			<ul>
+				<li class="next">Object.observe<span class="next">, Object.unobserve</span></li>
+				<li class="next">Array.observe<span class="next">, Array.unobserve</span></li>
+			</ul>
+
+			<ul>
+				<li class="next">Не следит за вложенными объектами</li>
+				<li class="next">Нельзя привязать к конкретному ключу</li>
+				<li class="next">Отличная фича для MVC-фреймворков</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Object.observe</h2>
+
+			<pre>
+				<code>obj = { name: 'Natali' };</code>
+				<code>Object.observe(obj, function(changes){</code>
+				<div class="next">
+					<code>    for(let record of changes)</code>
+					<code>        console.log(record);</code>
+				</div>
+				<code>});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Change record</h2>
+
+			<pre>
+				<code class="next">{</code>
+				<code class="next">    name: <em>key</em>,</code>
+				<code class="next">    object: <em>object</em>,</code>
+				<code class="next">    oldValue: <em>value</em>,</code>
+				<code class="next">    type: <em>changeType</em> <span class="next">// updated, new, deleted</span></code>
+				<code class="next">}</code>
+			</pre>
+		</div>
+	</section>
+
+
+	<section class="slide">
+		<div>
+			<h2>Прокси (перехват изменений)</h2>
+
+			<pre>
+				<code class="next">var engineer = { name: 'Joe', salary: 50 }; </code>
+				<div class="next">
+					<code>var interceptor = {</code>
+					<code>    <mark>set: function(receiver, prop, value){</mark></code>
+					<code class="next">        console.log(prop, 'изменено на', value);</code>
+					<code class="next">        <mark>receiver[prop] = value;</mark></code>
+					<code>    }</code>
+					<code>};</code>
+				</div>
+				<code class="next">engineer = <mark>Proxy</mark>(engineer, interceptor);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2>Классы!</h2>
+		</div>
+	</section>
+
+	<section class="slide" id="wow">
+		<div>
+			<h2>Классы</h2>
+
+			<img src="pictures/classes.jpg">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Классы</h2>
+
+			<ul>
+				<li>Дождались?</li>
+				<li class="next">Синтаксический сахар поверх прототипного программирования</li>
+				<li class="next">Уменьше порога вхождения</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Классы</h2>
+
+			<pre>
+				<code>class Animal {</code>
+				<div class="next">
+					<code>    <mark class="important">constructor</mark>(name){</code>
+					<code>        this.name = name;</code>
+					<code>    }</code>
+				</div>
+				<div class="next">
+					<code>    <mark>walk</mark>(){</code>
+					<code>        ....</code>
+					<code>    }</code>
+					<code>}</code>
+				</div>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Наследование</h2>
+
+			<pre>
+				<code><mark>class Duck extends Animal</mark> {</code>
+				<code>    constructor(name){</code>
+				<code class="next">        <mark>super</mark>(name);</code>
+				<code>    }</code>
+				<code>}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Экземпляры</h2>
+
+			<pre>
+				<code>var duck = new Duck();</code>
+				<code class="next">duck instanceof Duck; // true</code>
+				<code class="next">duck instanceof Animal; // true</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2>Модули</h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Модули</h2>
+
+			<ul>
+				<li class="next">Решение должно быть принятным для фанатов CJS Modules и AMD</li>
+				<li class="next">Универсальное решение для приложений любой сложности</li>
+				<li class="next">Покрыть все существующие костыли</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Модули: export</h2>
+
+			<pre>
+				<code>var num = 13;</code>
+				<div class="next">
+					<code><mark>export</mark> obj = {</code>
+					<code>    number: num</code>
+					<code>};</code>
+				</div>
+				<code class="next">export log = function(){};</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Модули: import</h2>
+
+			<pre>
+				<code><mark>import</mark> { obj } from 'lib/nums';</code>
+				<code class="next">alert(obj.number);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Модули: default</h2>
+
+			<pre class="next">
+				<code>module.exports = function(){};</code>
+			</pre>
+
+			<pre class="next">
+				<code>export <mark>default</mark> function(){};</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Export + shorthand</h2>
+
+			<pre>
+				<code>const MY = 13;</code>
+				<code>var process = function(){};</code>
+				<code>var obj = {};</code>
+			</pre>
+
+			<pre>
+				<code>export { MY, process };</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Модули сейчас</h2>
+
+			<pre>
+				<code class="next">var Math = (function(exports){</code>
+				<code class="next">    exports.PI = 3.14;</code>
+				<code class="next">    exports.sin = function(){};</code>
+				<code class="next">})(Math || {});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Модули: module</h2>
+
+			<pre>
+				<code class="next">export <mark class="next">module</mark> Math {</code>
+				<div class="next">
+					<code>    const PI = 3.14;</code>
+					<code>    sin = function(){};</code>
+					<code>}</code>
+				</div>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2>Генераторы</h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Генераторы</h2>
+
+			<p>Черная магия</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Генераторы</h2>
+
+			<pre>
+				<code>function<mark class="next">*</mark> fibonacci(){</code>
+				<code class="next">  var a = 1, b = 1;</code>
+				<code class="next">  <mark class="important">while(true)</mark>{</code>
+				<code class="next">    <mark>yield</mark> b;</code>
+				<code class="next">    [a, b] = [a, a + b];</code>
+				<code class="next">  }</code>
+				<code class="next">}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Использование</h2>
+
+			<pre>
+				<code>var generator = fibonacci();</code>
+				<code class="next">generator.next(); <mark class="next">// 1</mark></code>
+				<code class="next">generator.next(); <mark class="next">// 2</mark></code>
+				<code class="next">generator.next(); <mark class="next">// 3</mark></code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Генераторы</h2>
+
+			<pre>
+				<code>function* gen(){</code>
+				<code class="next">    yield 1;</code>
+				<div class="next">
+					<code>    yield 2;</code>
+					<code>}</code>
+				</div>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Использование</h2>
+
+			<pre>
+				<code class="next">for (let <mark>a of gen()</mark>) {</code>
+				<code class="next">    console.log(<mark>a</mark>)</code>
+				<code class="next">}</code>
+			</pre>
+
+			<pre class="next">
+				<code>// 1</code>
+				<code>// 2</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Где попробовать?</h2>
+
+			<ul>
+				<li class="next">Chrome 29+ (флажок в <em>chrome://flags</em>)</li>
+				<li class="next">Firefox </li>
+				<li class="next"><a href="https://github.com/google/traceur-compiler">Google Traceur Compiler</a> - компиляция ES6 кода в ES5</li>
+				<li class="next">NodeJS (<em>--harmony</em>)</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Полезное</h2>
+			<ul>
+				<li>
+					<a href="http://updates.html5rocks.com/2012/11/Respond-to-change-with-Object-observe">Object.observe tutorial on HTML5 Rocks</a>
+				</li>
+				<li>
+					<a href="http://kangax.github.io/es5-compat-table/es6/">Таблица поддержки ES6</a>
+				</li>
+				<li>
+					<a href="http://addyosmani.com/blog/ecmascript-6-resources-for-the-curious-javascripter/">Ресурсы для любопытных</a>
+				</li>
+				<li>
+					<a href="http://addyosmani.com/blog/tracking-es6-support/">Отслеживание поддержки ES6</a>
+				</li>
+				<li>
+					<a href="http://net.tutsplus.com/articles/news/ecmascript-6-today/">Use ES6 Today</a>
+				</li>
+				<li>
+					<a href="https://github.com/google/traceur-compiler">Google Traceur Compiler</a>
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Спасибо!</h2>
+
+			<ul>
+				<li>
+					<!-- <img src="pictures/icon-twitter.png"> -->
+					<a href="https://twitter.com/alexeyraspopov">twitter.com/alexeyraspopov</a>
+				</li>
+				<li>
+					<!-- <img src="pictures/icon-github.png"> -->
+					<a href="https://github.com/alexeyraspopov">github.com/alexeyraspopov</a>
+				</li>
+			</ul>
+		</div>
+	</section>
 
 	<p class="badge"><a href="https://github.com/shower/shower" target="_blank">Powered by Shower</a></p>
 	<div class="progress"><div></div></div>
