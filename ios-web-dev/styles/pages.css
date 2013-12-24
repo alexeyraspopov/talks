@@ -1,0 +1,91 @@
+.slide .accent{
+	margin: 30px 0 0;
+	color: #FFF;
+	text-align: center;
+	font-size: 70px;
+	text-shadow: 0 0 10px black;
+}
+
+.slide h2{
+	color: #333;
+}
+
+#frontpage .author{
+	width: 410px;
+	margin: 200px 0 0 auto;
+	background: black;
+	color: white;
+	text-align: center;
+	font-size: 32px;
+}
+
+.shout.inverse{
+	background: black;
+}
+
+.shout.inverse h2{
+	color: white;
+}
+
+p.nope{
+	color: red;
+	font-weight: bold;
+	font-size: 36px;
+}
+img.inline{
+	width: 100%;
+}
+
+.icon{
+	position: relative;
+	margin-left: 42px;
+}
+.icon::before{
+	content: '';
+	position: absolute;
+	top: -4px;
+	left: -42px;
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+}
+.sublime-icon::before{
+	background: url('../pictures/sublime-icon.png') no-repeat;
+	background-size: contain;
+}
+.chrome-icon::before{
+	background: url('../pictures/chrome-icon.png') no-repeat;
+	background-size: contain;
+}
+
+
+#jqueryAnimation h2{
+	font-family: "Comic Sans MS";
+	background-image: -webkit-linear-gradient(left, violet 0%, red 10%, orange 16%, yellow 32%, green 48%, blue 60%, indigo 76%, violet 100%);
+	height: 500px;
+	background-size: 512px;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+#jqueryAnimation.active h2{
+	-webkit-transform: translate3d(0, -50%, 0);
+	-webkit-animation: background-moving 1s infinite linear;
+}
+
+#bugs div{
+	padding-top: 50px;
+	height: auto;
+}
+
+#turbo .accent{
+	margin-top: -40px;
+}
+#turbo code{
+	margin-top: 320px;
+}
+
+@-webkit-keyframes background-moving{
+	to{
+		background-position: 100% 0;
+	}
+}

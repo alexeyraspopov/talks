@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<title>Разработка web-приложений для iOS</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<link rel="stylesheet" href="styles/pages.css">
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Разработка web-приложений для iOS</h1>
+		<p><a href="https://twitter.com/alexeyraspopov" target="_blank">Алексей Распопов</a>, <a href="http://qapint.com" target="_blank">QAP Int</a></p>
+	</header>
+
+	<section class="slide cover w" id="frontpage">
+		<div>
+			<h2 class="accent">Разработка web-приложений для iOS</h2>
+
+			<p class="author">Алексей Распопов, QAP Int</p>
+			<img src="pictures/front-cover.jpg" class="cover">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Кто я?</h2>
+
+			<ul>
+				<li>Lead Front-end Developer в компании <a href="http://qapint.com">QAP Int</a></li>
+				<li>&lt;3 Open Source (<a href="https://github.com/alexeyraspopov" target="_blank">github.com/alexeyraspopov</a>)</li>
+			</ul>
+		</div>
+	</section>
+
+	<!-- Speech: компания КЕП создает мобильные приложения и интерактивный контент для обеспечения CLM процесса в фармацевтических компаниях -->
+	<section class="slide">
+		<div>
+			<h2>QAP Int. Кто мы?</h2>
+
+			<ul>
+				<li><a href="http://qapint.com" target="_blank">qapint.com</a></li>
+				<li>Создаем мобильные приложения и интерактивный контент</li>
+				<li>Разработка и внедрение CLM процесса</li>
+				<li>Более 4 лет на рынке</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Почему мобильные веб-приложения?</h2>
+			<ul>
+				<li class="next">Вы используете технологии в которых вы профи</li>
+				<li class="next">Вы можете быстро создавать конкурентноспособные приложения для App Store</li>
+				<li class="next">Внушительный набор возможностей и инструментов</li>
+				<li class="next">Кроссплатформенность</li>
+			</ul>
+
+			<ul>
+				<li class="next">iPad &mdash; отличный презентационный инструмент</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2>Легко!</h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Web Clip</h2>
+
+			<img src="pictures/webclip.jpg" class="inline">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Web Clip</h2>
+
+			<ul>
+				<li>Самый простой способ создать веб-приложение</li>
+				<li class="next">Легко распространять</li>
+				<li class="next">Нужен доступ к интернету</li>
+				<li class="next"><strong>Application Cache</strong> для офлайн-версии <br>(гайд на <a href="http://goo.gl/2NhDvi" target="_blank">HTML5 Rocks</a> и на <a href="http://habrahabr.ru/post/151815/" target="_blank">Хабре</a>)</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide cover w">
+		<div>
+			<h2 class="accent">Обёртка</h2>
+			<img src="pictures/wrapper.jpg" class="cover">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Custom Wrapper</h2>
+
+			<p>Objective-C приложение с UIWebView, в котором загружается контент</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>PhoneGap</h2>
+
+			<ul>
+				<li class="next">Разрабатывается в Adobe (<a href="http://phonegap.com/" target="_blank">phonegap.com</a>)</li>
+				<li class="next">Мультиплатформенный</li>
+				<li class="next">Набор инструментов разработчика</li>
+				<li class="next">API для работы с native API устройства</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Другие</h2>
+
+			<ul>
+				<li>Cordova &mdash; <a href="http://cordova.apache.org" target="_blank">cordova.apache.org</a></li>
+				<li>Titanium &mdash; <a href="http://appcelerator.com" target="_blank">appcelerator.com</a></li>
+				<li>etc.</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2>Всего один браузер</h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Поддержка современных стандартов</h2>
+
+			<ul>
+				<li class="next">CSS 3 stuff</li>
+				<li class="next">Последняя спецификация JavaScript</li>
+				<ul>
+					<li class="next">API для выборки элементов</li>
+					<li class="next">API для простой работы с массивами</li>
+				</ul>
+				<li class="next">Флексбокс</li>
+				<li class="next">Канвас</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide shout inverse">
+		<div>
+			<h2>jQuery <br>не нужна</h2>
+		</div>
+	</section>
+
+	<!-- Speech: то, что являлось основой веб-разработки долгие годы больше не нужно -->
+	<section class="slide shout inverse">
+		<div>
+			<h2>Совсем!</h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>jQuery не нужна</h2>
+
+			<ul>
+				<li>Тяжелая (v2.0.3 &mdash; 81 Кб)</li>
+				<!-- Speech: к слову, столько же весит angular.js при этом пользы от него больше -->
+				<li class="next">Древняя (c 2006 года)</li>
+				<!-- Speech: задумывалась для других задач -->
+				<li class="next">2/3 кода &mdash; нормализация и фикс багов</li>
+				<!-- Speech: зачем это все в медленном браузере? -->
+				<li class="next">native API &mdash; мощь!</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide shout" id="jqueryAnimation">
+		<div>
+			<h2>jQuery анимация <br>не нужна!</h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Анимация</h2>
+
+			<ul>
+				<li>CSS 3 Animation быстрее</li>
+				<li class="next">Не блокирует основной поток событий</li>
+				<li class="next">Есть события для JS (подробно тут &mdash; <a href="http://goo.gl/Yrz8ol" target="_blank">goo.gl/Yrz8ol</a>)</li>
+				<li class="next"><code>requestAnimationFrame</code> для canvas</li>
+			</ul>
+
+			<p class="next">Jake Archibald все объяснил тут &mdash; <a href="http://vimeo.com/69385032" target="_blank">vimeo.com/69385032</a></p>
+		</div>
+	</section>
+
+	<!-- Speech: прежде чем преступить к разработке, нужно знать чем отличается Mobile Safari от Desktop Safari -->
+	<section class="slide">
+		<div>
+			<h2>Mobile Safari vs Desktop Safari</h2>
+
+			<ul>
+				<li class="next">Производительность</li>
+				<li class="next">Отсутствует Flash</li>
+				<li class="next">Маленький размер кеша</li>
+				<li class="next">Жесты от края экрана (iOS 7)</li>
+				<li class="next">Нет возможности загружать файлы (iOS &lt; 7)</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide" id="bugs">
+		<div>
+			<img src="pictures/bugs.jpg" class="inline">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Page bouncing</h2>
+			<!-- Speech: ну и какого хрена страница таскается по экрану? -->
+			<img src="pictures/bouncing.png" class="inline">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Page bouncing</h2>
+
+			<pre>
+				<code>document.ontouchmove = function(event){</code>
+				<code>	event.preventDefault();</code>
+				<code>};</code>
+			</pre>
+
+			<p class="next">Не позволяет использовать native-скроллинг в элементах</p>
+
+			<pre class="next">
+				<code>[[webView scrollView] setBounces: NO];</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Распознавание номеров телефонов</h2>
+
+			<ul>
+				<li class="next">Запатентовано!</li>
+				<li class="next">Если больше 3-4 цифр - заменяет ссылкой</li>
+				<li class="next">С помощью CSS не фиксится</li>
+				<li class="next">Решение: <code>&lt;meta name="format-detection" content="telephone=no"&gt;</code></li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Ретина дисплеи</h2>
+
+			<ul>
+				<li class="next">Дисплеи с пиксельным соотношением больше, чем <strong>1</strong></li>
+				<li class="next">Размывает графику</li>
+				<li class="next">Можно использовать изображения с размером <strong>2x</strong></li>
+				<li class="next">Можно использовать SVG</li>
+
+				<li class="next"><a href="http://pepelsbey.net/pres/clear-and-sharp/" target="_blank">Вадим Макеев &mdash; Чётко и резко</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Тормозит клик</h2>
+			<p>Событие <code>click</code> срабатывает с задержкой 300 мс</p>
+			<ol>
+				<li class="next">Используйте событие <code>touchend</code></li>
+				<li class="next">Используйте библиотеки с событием <code>tap</code></li>
+				<ul>
+					<li class="next">Hammer <a href="http://eightmedia.github.io/hammer.js" target="_blank">eightmedia.github.io/hammer.js</a></li>
+					<li class="next">Touchy <a href="https://github.com/jofan/Touchy" target="_blank">github.com/jofan/touchy</a></li>
+					<li class="next">etc.</li>
+				</ul>
+			</ol>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>orientationchange не работает</h2>
+
+			<pre class="next">
+				<code>&lt;meta name="viewport" content="<mark class="important">width=device-width</mark>"&gt;</code>
+			</pre>
+
+			<pre class="next">
+				<code>&lt;meta name="viewport" content="<mark>initial-scale=1</mark>"&gt;</code>
+			</pre>
+
+			<p class="next">Объяснение тут &mdash; <a href="http://goo.gl/5rdJyc" target="_blank">goo.gl/5rdJyc</a></p>
+
+			<p class="next">Можно использовать событие <code>resize</code></p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Автоматический запуск видео</h2>
+
+			<p class="next nope">НЕЛЬЗЯ!</p>
+
+			<div class="next">
+				<p>Только если вы <em>пакуете</em> приложение в обертку</p>
+
+				<pre>
+					<code>UIWebView.<mark>allowsInlineMediaPlayback</mark> = YES;</code>
+					<code>UIWebView.<mark>mediaPlaybackRequiresUserAction</mark> = NO;</code>
+				</pre>
+			</div>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Производительность анимации</h2>
+			<ul>
+				<li class="next">Элемент не должен быть статическим (<code>position: absolute;</code>)</li>
+				<li class="next">Рисовать без тормозов <code>-webkit-transform: translateZ(0);</code></li>
+				<li class="next">Перемещайте элемент через <code>transform</code> <br>(подробное объяснение от Пола Айриша &mdash; <a href="http://goo.gl/lafFV3" target="_blank">goo.gl/lafFV3</a>)</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Мелочи</h2>
+
+			<ul>
+				<li class="next">Кеш ограничен &mdash; &asymp;5mb для изображений</li>
+				<li class="next">Неопределенно большое количество HTML крешит приложение</li>
+				<li class="next">Внутри одного приложения &mdash; один localStorage</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide cover w" id="turbo">
+		<div>
+			<h2 class="accent">Hardware Acceleration</h2>
+
+			<img src="pictures/turbo.jpg" class="cover">
+
+			<pre>
+				<code><mark>-webkit-transform: translateZ(0);</mark></code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Инструменты для front-end</h2>
+
+			<ul>
+				<li class="next"><a href="http://yeoman.io" target="_blank">Yeoman</a> &mdash; инструмент для скаффолдинга</li>
+				<li class="next"><a href="http://bower.io" target="_blank">Bower</a> &mdash; пакетный менеджер</li>
+				<li class="next"><a href="http://gruntjs.com" target="_blank">Grunt</a> &mdash; автоматизатор процессов</li>
+				<li class="next"><a href="http://karma-runner.github.io/0.10/index.html" target="_blank">Karma</a> &mdash; test-runner</li>
+				<li class="next">Много MV*-фреймворков (тысячи их на <a href="http://todomvc.com" target="_blank">todomvc.com</a>)</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Инструменты для сборки и деплоя</h2>
+
+			<ul>
+				<li class="next">PhoneGap CLI (<a href="http://goo.gl/15VhHa" target="_blank">goo.gl/15VhHa</a>)</li>
+				<li class="next"><a href="http://gruntjs.com" target="_blank">Grunt</a> &mdash; есть task для PhoneGap</li>
+				<li class="next"><a href="https://build.phonegap.com" target="_blank">PhoneGap Build</a> &mdash; без всяких Jenkins'ов</li>
+				<li class="next"><a href="http://www.gradle.org/">Gradle</a> &mdash; инструмент автоматизации</li>
+				<li class="next">Jenkins (non-PhoneGap apps)</li>
+				<li class="next">XCode и Application Loader &mdash; для загрузки приложений в App Store <a href="http://goo.gl/8SizSW">goo.gl/8SizSW</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Основные инструменты</h2>
+
+			<ul>
+				<li class="next">Любой текстовый редактор или IDE (к примеру, <span class="icon sublime-icon">Sublime Text</span>)</li>
+				<li class="next"><span class="icon chrome-icon">Google Chrome</span> &mdash; не только браузер но и набор отличных инструментов</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Dev Tools</h2>
+
+			<img src="pictures/timeline.png" class="inline">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Будущее</h2>
+
+			<ul>
+				<li class="next">Новое поколение устройств на 64-битной архитектуре</li>
+				<!-- Speech: правильно, зачем фиксить производительность iOS7, давайте новое железо втыкнем -->
+				<li class="next">ECMAScript 6 (Object.observe, Proxy, WeakMap, etc)</li>
+				<li class="next">Web Components</li>
+				<li class="next">Тонны CSS-плюшек</li>
+
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Интересно</h2>
+
+			<ul>
+				<li><a href="https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/Introduction/Introduction.html" target="_blank">Developing Web Content for Safari</a></li>
+				<li><a href="http://vimeo.com/69385032" target="_blank">Jake Archibald &mdash; Rendering without lumpy bits</a></li>
+				<li><a href="http://www.paulirish.com/2012/talk-tooling-the-webapp-development-stack/" target="_blank">Paul Irish &mdash; Tooling &amp; the Webapp Development Stack</a></li>
+				<li><a href="http://pepelsbey.net/pres/clear-and-sharp/" target="_blank">Вадим Макеев &mdash; Чётко и резко</a></li>
+				<li><a href="http://addyosmani.com/blog/performance-optimisation-with-timeline-profiles/" target="_blank">Addy Osmani &mdash; Performance Optimisation With Timeline Profiles</a></li>
+				<li><a href="http://habrahabr.ru/post/188580/" target="_blank">Почему мобильные веб-приложения работают медленно</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Вопросы</h2>
+
+			<ul>
+				<li><a href="https://twitter.com/alexeyraspopov" target="_blank">@alexeyraspopov</a></li>
+				<li><a href="mailto:alr@qapint.com">alr@qapint.com</a></li>
+				<li><a href="https://github.com/alexeyraspopov" target="_blank">github.com/alexeyraspopov</a></li>
+			</ul>
+
+			<!-- <p>ссылка на эту презентацию &mdash; пиу-пиу</p> -->
+		</div>
+	</section>
+
+	<p class="badge"><a href="https://github.com/shower/shower" target="_blank">Powered by Shower</a></p>
+	<div class="progress"><div></div></div>
+
+	<script src="shower/shower.js"></script>
+</body>
+</html>
