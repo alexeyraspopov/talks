@@ -45,6 +45,8 @@
 
 			<ul>
 				<li>Основная сущность &mdash; функции</li>
+				<li class="next">Все что вы делаете &mdash; функции</li>
+				<li class="next">Функции, функции, функции...</li>
 			</ul>
 		</div>
 	</section>
@@ -86,8 +88,7 @@
 
 			<ul>
 				<li>Императивный код &mdash; зло</li>
-				<li>Отдельные функции проще описывать и компоновать</li>
-				...
+				<li>Отдельные функции проще описывать и <em>компоновать</em></li>
 			</ul>
 		</div>
 	</section>
@@ -99,7 +100,7 @@
 			<pre>
 				<code>function <mark>compose</mark>(f, g){</code>
 				<code>    return function(x){</code>
-				<code>        return f(g(x));</code>
+				<code>        return <mark>f(g(x))</mark>;</code>
 				<code>    };</code>
 				<code>}</code>
 			</pre>
@@ -111,8 +112,8 @@
 			<h2>Композиция</h2>
 
 			<pre>
-				<code class="next">parseInt :: String -> Number</code>
-				<code class="next">getValue :: Node -> String</code>
+				<code class="next">parseInt :: <em>String</em> -> Number</code>
+				<code class="next">getValue :: Node -> <em>String</em></code>
 			</pre>
 
 			<pre>
@@ -160,7 +161,7 @@
 		<div>
 			<h2>Но мы же делаем большие приложения</h2>
 
-			<figure>
+			<figure class="next">
 				<blockquote>
 					<p>The secret to building large apps is never build them. Break them into smaller pieces then assemble into your big app.</p>
 				</blockquote>
@@ -281,7 +282,7 @@
 			<h2>Но</h2>
 
 			<p class="next">Мы создаем клиентские, интерактивные приложения</p>
-			<p class="next">Можно применить данную абстракцию для решения локальных задач</p>
+			<!-- <p class="next">Можно применить данную абстракцию для решения локальных задач</p> -->
 		</div>
 	</section>
 
@@ -368,7 +369,7 @@
 
 			<p class="next">Решение проблемы, которой у вас не было</p>
 
-			<p class="next"><strong>Монада</strong> &mdash; объект, абстракция</p>
+			<p class="next"><strong>Монада</strong> &mdash; объект, абстракция. Представьте себе коробочку</p>
 		</div>
 	</section>
 
@@ -381,6 +382,55 @@
 				<!-- как говорил Крокфорд: как только вы их понимаете вы теряете способность объяснять -->
 				<li>Чтобы понять монады не нужно знать теорию категорий</li>
 			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Связывание</h2>
+
+			<pre>
+				<code>firstFn <mark>&gt;&gt;=</mark> secondFn <mark>&gt;&gt;=</mark> thirdFn</code>
+			</pre>
+
+			<pre class="next">
+				<code>firstFn()<mark>.bind</mark>(secondFn).<mark>bind</mark>(thirdFn)</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Основные функции</h2>
+
+			<pre>
+				<code>unit(value)</code>
+				<code>bind(monad, <strong>function(value)</strong>)</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Аксиомы</h2>
+
+			<pre>
+				<code class="next">bind(unit(value), f) ==== f(value)</code>
+				<code class="next">bind(monad, unit) ==== monad</code>
+				<div class="next">
+					<code>bind(bind(monad, f), g) ==== bind(monad, function(value){</code>
+					<code>   return bind(f(value), g);</code>
+					<code>});</code>
+				</div>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Добавить немного объектов</h2>
+
+			<pre><code><em>monad</em>.bind(function(value));</code></pre>
 		</div>
 	</section>
 
@@ -423,7 +473,7 @@
 			<h2>Используем обещания</h2>
 
 			<pre>
-				<code>read('data.json').then(function(response){</code>
+				<code>read('data.json').<mark>then</mark>(function(response){</code>
 				<code>    // работаем с <mark>response</mark></code>
 				<code>}[, error callback])</code>
 			</pre>
@@ -463,11 +513,11 @@
 			<h2>А было бы</h2>
 
 			<pre>
-				<code>getUserInfo(function(error, info){</code>
+				<code><mark>getUserInfo</mark>(function(error, info){</code>
 				<code>    if (error) throw error;</code>
-				<code>    getUserTweets(info, function(error, tweets){</code>
+				<code>    <mark>getUserTweets</mark>(info, function(error, tweets){</code>
 				<code>        if (error) throw error;</code>
-				<code>        sendToEmail(tweets);</code>
+				<code>        <mark>sendToEmail</mark>(tweets);</code>
 				<code>    });</code>
 				<code>});</code>
 			</pre>
@@ -481,6 +531,37 @@
 	<section class="slide">
 		<div>
 			<h2>Потоки (Stream)</h2>
+
+			<ul>
+				<li>Монада, у которой метод <mark>bind</mark> &mdash; метод <mark>pipe</mark></li>
+				<li></li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Unix pipe</h2>
+
+			<p>Вы уже знакомы с конвеерами</p>
+
+			<pre><code>cat file.txt <mark>|</mark> grep ^boo <mark>|</mark> foo</code></pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Как это в JS?</h2>
+
+			<p>Видели <a href="http://gulpjs.com">Gulp</a>?</p>
+
+			<pre>
+				<code>fileSource</code>
+				<code>    <mark>.pipe</mark>(jshint)</code>
+				<code>    <mark>.pipe</mark>(complexity)</code>
+				<code>    <mark>.pipe</mark>(uglify)</code>
+				<code>    <mark>.pipe</mark>(fileDest);</code>
+			</pre>
 		</div>
 	</section>
 
@@ -491,7 +572,7 @@
 			<pre>
 				<code>a = 10</code>
 				<code class="next">b = a + 2</code>
-				<code class="next">a = 20 <mark class="next">// b is 12</mark></code>
+				<code class="next">a = 20 <mark class="next">// b == 12</mark></code>
 			</pre>
 
 		</div>
@@ -504,7 +585,7 @@
 			<pre>
 				<code>a = 10</code>
 				<code>b = a + 2</code>
-				<code>a = 20 <mark class="next">// b is 22</mark></code>
+				<code>a = 20 <mark class="next">// b == 22</mark></code>
 			</pre>
 
 		</div>
@@ -563,11 +644,37 @@
 			<h2>Пишем игру. Управление игроком (bacon.js)</h2>
 
 			<pre>
-				<code class="next">$(document).asEventStream('keydown')</code>
+				<code class="next">$(document).<mark>asEventStream</mark>('keydown')</code>
 				<code class="next">    .<strong>filter</strong>(isArrow)</code>
 				<code class="next">    .<strong>map</strong>(selectDirection)</code>
 				<code class="next">    .<strong>onValue</strong>((direction) => /* action */)</code>
 			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Счетчик</h2>
+
+			<pre>
+				<code>up = $('#up')<span class="next">.<mark>asEventStream</mark>('click');</span></code>
+				<code class="next">down = $('#down').<mark>asEventStream</mark>('click');</code>
+
+				<code class="next">counter =</code>
+				<code class="next">    up.<mark>map</mark>(1)<span class="next">.<mark>merge</mark>(<span class="next">down.<mark>map</mark>(-1)</span>)</span></code>
+				<code class="next">    .<mark>scan</mark>(0, (x, y) => x + y);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Почему?</h2>
+
+			<ul>
+				<li class="next">Программирование должно приносить радость</li>
+				<li class="next">Код должен быть эстетичен</li>
+			</ul>
 		</div>
 	</section>
 
