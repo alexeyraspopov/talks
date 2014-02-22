@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<title>Functional programming</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<link rel="stylesheet" href="styles/pages.css">
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Функциональное программирование</h1>
+		<p>Алексей Распопов</p>
+	</header>
+
+	<section class="slide shout">
+		<div>
+			<h2>Functional programming</h2>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2>Вы обязаны угореть по ФП</h2>
+		</div>
+	</section>
+
+	<section class="slide inverse" id="disclaimer">
+		<div>
+			<h2>Дисклеймер</h2>
+
+			<ul>
+				<li class="next">Будет немного математики</li>
+				<li class="next">Говорим только о подходе к решению задачи</li>
+				<li class="next">На слайдах будет код</li>
+				<li class="next">Haskell не страшный, поверьте :)</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Что значит "функциональное программирование"?</h2>
+
+			<ul>
+				<li>Основная сущность &mdash; функции</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Школьный курс математики</h2>
+
+			<pre><code>f(x) = 2x + 4</code></pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Функция показывает связь между данными</h2>
+
+			<p class="next">Типы данных: String, Number</p>
+
+			<pre class="next"><code>f: String -> Number</code></pre>
+
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Функция показывает связь между данными</h2>
+
+			<p>Как из строки сделать число?</p>
+
+			<pre class="next"><code><mark>parseInt</mark>: String -> Number</code></pre>
+
+			<pre class="next"><code>parseInt :: String -> Number <em>(Haskell Type Notation)</em></code></pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>А к чему все это?</h2>
+
+			<ul>
+				<li>Императивный код &mdash; зло</li>
+				<li>Отдельные функции проще описывать и компоновать</li>
+				...
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Композиция</h2>
+
+			<pre>
+				<code>function <mark>compose</mark>(f, g){</code>
+				<code>    return function(x){</code>
+				<code>        return f(g(x));</code>
+				<code>    };</code>
+				<code>}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Композиция</h2>
+
+			<pre>
+				<code class="next">parseInt :: String -> Number</code>
+				<code class="next">getValue :: Node -> String</code>
+			</pre>
+
+			<pre>
+				<code class="next">getInputAge :: Node -> Number</code>
+				<code class="next">getInputAge = compose(parseInt, getValue)</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Традиционный (императивный) код</h2>
+
+			<ul>
+				<li>Изменение набора переменных (состояний)</li>
+				<li>Неочевидная связь между наборами данных</li>
+				<li>Неявные превращения</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>А что если?</h2>
+
+			<ul>
+				<li>Абстрагировать задачу до простого, последовательного превращения input в output?</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Превращение</h2>
+
+			<pre>
+				<code class="next">x &mdash; входные данные</code>
+				<code class="next">x' &mdash; результат работы</code>
+				<code class="next"><mark>x</mark> = x<sub>0</sub> → x<sub>1</sub> → x<sub>2</sub> → ··· → x<sub>n</sub> = <mark>x'</mark></code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Но мы же делаем большие приложения</h2>
+
+			<figure>
+				<blockquote>
+					<p>The secret to building large apps is never build them. Break them into smaller pieces then assemble into your big app.</p>
+				</blockquote>
+				<figcaption>Justin Meyer, 2010</figcaption>
+			</figure>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Трубы</h2>
+
+			<figure>
+				<blockquote>
+					<p>We should have some ways of connecting programs like garden hose &mdash; screw in another segment when it becomes necessary to massage data in another way. This is the way of IO also.</p>
+				</blockquote>
+				<figcaption>Doug McIlroy, 1964</figcaption>
+			</figure>
+		</div>
+	</section>
+
+	<section class="slide cover w">
+		<div><img src="pictures/tubes.jpg" class="cover"></div>
+	</section>
+
+	<section class="slide cover w">
+		<div>
+			<h2>Входные данные</h2>
+			<img src="pictures/input.png" class="cover">
+		</div>
+	</section>
+
+	<section class="slide cover w">
+		<div>
+			<h2>Процесс изменения данных</h2>
+			<img src="pictures/process.png" class="cover">
+		</div>
+	</section>
+
+	<section class="slide cover w">
+		<div>
+			<h2>Результат работы</h2>
+			<img src="pictures/result.png" class="cover">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Обычное дело для JavaScript</h2>
+
+			<pre>
+				<code>var numbers = [1, 2, 3, 4, 5, 6, 7, 8];</code>
+			</pre>
+			<pre>
+				<code class="next">numbers</code>
+				<code class="next">    .<strong>map</strong>((n) => n * n)</code>
+				<code class="next">    .<strong>filter</strong>((n) => n % 2 === 0)</code>
+				<code class="next">    .<strong>reduce</strong>((a, b) => a + b);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Обычное дело для JavaScript</h2>
+
+			<pre>
+				<code>var numbers = [1, 2, 3, 4, 5, 6, 7, 8];</code>
+			</pre>
+			<pre>
+				<code>numbers</code>
+				<code>    .<strong>map</strong>((n) => n * n)</code>
+				<code>    <mark>.<strong>filter</strong>((n) => n &lt; 40)</mark></code>
+				<code>    .<strong>filter</strong>((n) => n % 2 === 0)</code>
+				<code>    .<strong>reduce</strong>((a, b) => a + b);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>А что вы сделаете тут?</h2>
+
+			<pre>
+				<code>var numbers = [1, 2, 3, 4, 5, 6, 7, 8], sum = 0, i, num;</code>
+				<code><strong>for</strong>(i = 0; i &lt; numbers.length; i++){</code>
+				<code>    num = numbers[i];</code>
+				<code>    <mark>num *= num</mark>;</code>
+				<code>    if(<mark>num % 2 === 0</mark>){</code>
+				<code>        <mark>sum += num</mark>;</code>
+				<code>    }</code>
+				<code>}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide" id="shit">
+		<div>
+			<img src="pictures/fuckthisshit.jpg" class="poster">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>А мы же можем переиспользовать функции</h2>
+
+			<pre>
+				<code>numbers</code>
+				<code>    .<strong>map</strong>(square)</code>
+				<code>    .<strong>filter</strong>(isEven)</code>
+				<code>    .<strong>reduce</strong>(sum);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Но</h2>
+
+			<p class="next">Мы создаем клиентские, интерактивные приложения</p>
+			<p class="next">Можно применить данную абстракцию для решения локальных задач</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Следствия</h2>
+
+			<ul>
+				<li class="next">Любое <strong>действие</strong> пользователя нацелено на получение <strong>результата</strong></li>
+				<li class="next"><strong>Действие</strong> пользователя &mdash; <strong>входные данные</strong>, которые нужно превратить в результат</li>
+				<li class="next"><strong>Превращение данных</strong> в результат &mdash; <strong>поток</strong> действий</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Важно</h2>
+
+			<ul>
+				<li class="next">Важна правильная и легкая компоновка действий</li>
+				<li class="next">Неявное превращение входных данных &mdash; источник ошибок</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Избегайте побочных эффектов функций</h2>
+
+			<p class="next">Побочный эффект &mdash; чтение и модификация глобальных значений внутри функции</p>
+			<p class="next">Замыкание &mdash; побочный эффект :(</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Чистая функция</h2>
+
+			<ul>
+				<li>При одних и тех же входных данных функция возвращает один и тот же результат</li>
+				<li>Функция не изменяет какие-либо другие данные</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Все ради чистого функционального программирования</h2>
+
+			<ul>
+				<li class="next">Отказаться от присвоений <!-- (но вы все еще можете объявлять переменные) --></li>
+				<li class="next">Отказаться от замыканий, циклов <!-- (используйте рекурсию) --></li>
+				<li class="next">Заморозить массивы и объекты</li>
+				<li class="next">Не использовать функции <code>Math.random</code>, <code>Date</code> <!-- (каждый вызов дает новый результат, что не принятно с точки зрения математики) --></li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<img src="pictures/success.jpg" class="poster">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Мир так жесток</h2>
+
+			<ul>
+				<li class="next">Комплексные приложения непостоянные</li>
+				<li class="next">Взаимодействие с DOM, массивами, объектами</li>
+			</ul>
+
+			<p class="next">Желательно максимально избавляться от побочного эффекта в функциях высшего порядка</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Монады</h2>
+
+			<p>Для избавления от побочного эффекта в цепочках вычислений используются <strong>монады</strong></p>
+
+			<p class="next">Решение проблемы, которой у вас не было</p>
+
+			<p class="next"><strong>Монада</strong> &mdash; объект, абстракция</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Как работает?</h2>
+
+			<ul>
+				<li>Слишком тяжелые в объяснении</li>
+				<!-- как говорил Крокфорд: как только вы их понимаете вы теряете способность объяснять -->
+				<li>Чтобы понять монады не нужно знать теорию категорий</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Лучший пример монады в JS</h2>
+
+			<p>Promise &mdash; асинхронная монада (цепочка вычислений)</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Обычная загрузка файла</h2>
+
+			<pre>
+				<code>read('data.json', function(error, response){</code>
+				<code>    if (error) throw error;</code>
+				<code>    // работаем с <mark>response</mark></code>
+				<code>});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Нотация типов</h2>
+
+			<pre>
+				<code class="next">read :: URL -> Callback -> ()</code>
+				<code class="next">Callback :: Error -> Result -> ()</code>
+			</pre>
+
+			<pre class="next"><code>read :: URL -> (Error -> Result -> ()) -> ()</code></pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Используем обещания</h2>
+
+			<pre>
+				<code>read('data.json').then(function(response){</code>
+				<code>    // работаем с <mark>response</mark></code>
+				<code>}[, error callback])</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Нотация типов</h2>
+
+			<pre><code>read :: URL -> Promise Result</code></pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Метод <code>then</code></h2>
+
+			<pre><code>then :: (Result -> Promise Result) -> Promise Result</code></pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Цепочка вычислений</h2>
+
+			<pre>
+				<code>getUserInfo()</code>
+				<code>   .then(getUserTweets)</code>
+				<code>   .then(sendToEmail);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>А было бы</h2>
+
+			<pre>
+				<code>getUserInfo(function(error, info){</code>
+				<code>    if (error) throw error;</code>
+				<code>    getUserTweets(info, function(error, tweets){</code>
+				<code>        if (error) throw error;</code>
+				<code>        sendToEmail(tweets);</code>
+				<code>    });</code>
+				<code>});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div><img src="pictures/shitbale.jpg" class="poster"></div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Потоки (Stream)</h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Стандартное поведение</h2>
+
+			<pre>
+				<code>a = 10</code>
+				<code class="next">b = a + 2</code>
+				<code class="next">a = 20 <mark class="next">// b is 12</mark></code>
+			</pre>
+
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Нестандартное поведение</h2>
+
+			<pre>
+				<code>a = 10</code>
+				<code>b = a + 2</code>
+				<code>a = 20 <mark class="next">// b is 22</mark></code>
+			</pre>
+
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Реактивное программирование</h2>
+
+			<img src="pictures/excel1.gif" class="poster">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>И что?</h2>
+
+			<ul>
+				<li>Вы описываете не порядок операций, а правила и связи</li>
+				<li>События (как входные данные) превращаются в потоки</li>
+				<li>Использование ФП со всеми его прелестями</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Все же помнят knockout?</h2>
+
+			<pre>
+				<code><mark>a</mark> = ko.observable(10)</code>
+				<code> </code>
+				<code><mark>b</mark> = ko.computed(function(){</code>
+				<code>    return <mark>a</mark>() + 2;</code>
+				<code>});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Пишем игру. Управление игроком</h2>
+
+			<pre>
+				<code class="next">document.addEventListener('keydown', function(event){</code>
+				<code class="next">    if(event.keyCode >= 37 &amp;&amp; event.keyCode &lt;= 40){</code>
+				<code class="next">         // Механика игры здесь</code>
+				<code class="next">    }</code>
+				<code class="next">});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Пишем игру. Управление игроком (bacon.js)</h2>
+
+			<pre>
+				<code class="next">$(document).asEventStream('keydown')</code>
+				<code class="next">    .<strong>filter</strong>(isArrow)</code>
+				<code class="next">    .<strong>map</strong>(selectDirection)</code>
+				<code class="next">    .<strong>onValue</strong>((direction) => /* action */)</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Библиотеки</h2>
+
+			<ul>
+				<li class="next"><a href="https://github.com/jashkenas/underscore">underscore</a> &mdash; мощный набор утилит</li>
+				<li class="next"><a href="https://github.com/douglascrockford/monad">douglascrockford/monad</a> &mdash; легкая реализация монад от JavaScript Guy</li>
+				<li class="next"><a href="https://github.com/baconjs/bacon.js">bacon.js</a> &mdash; реактивный бекон</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Что почитать?</h2>
+
+			<ul>
+				<li><a href="https://code.google.com/p/funprog-ru/">Введение в функциональное программирование. John Harrison</a></li>
+				<li><a href="http://habrahabr.ru/post/127556/">Yet another monad tutorial</a></li>
+				<li><a href="http://habrahabr.ru/post/183150/">Функторы, аппликативные функторы и монады в картинках</a></li>
+				<li><a href="http://habrahabr.ru/post/198656/">Functional Reactive Programming на Bacon.js</a></li>
+				<li><a href="http://blog.reactiveprogramming.org/">Блог о реактивном программировании</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Что посмотреть?</h2>
+
+			<ul>
+				<li><a href="http://www.youtube.com/watch?v=dkZFtimgAcM">Douglas Crockford: Monads and Gonads</a></li>
+				<li><a href="http://www.youtube.com/watch?v=ZhuHCtR3xq8">Brian Beckman: Don't fear the Monad</a></li>
+				<li><a href="http://www.youtube.com/watch?v=aJrM46yzg0Q">Trevor Norris: Working with Node.js Buffers and Streams</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Что почитать? (by James Coglan)</h2>
+
+			<ul>
+				<li><a href="https://blog.jcoglan.com/2011/03/05/translation-from-haskell-to-javascript-of-selected-portions-of-the-best-introduction-to-monads-ive-ever-read/">Translation from Haskell to JavaScript of selected portions of the best introduction to monads I've ever read</a></li>
+				<li><a href="https://blog.jcoglan.com/2011/03/06/monad-syntax-for-javascript/">Monad syntax for JavaScript</a></li>
+				<li><a href="https://blog.jcoglan.com/2011/03/11/promises-are-the-monad-of-asynchronous-programming/">Promises are the monad of asynchronous programming</a></li>
+				<li><a href="https://blog.jcoglan.com/2013/03/30/callbacks-are-imperative-promises-are-functional-nodes-biggest-missed-opportunity/">Callbacks are imperative, promises are functional: Node's biggest missed opportunity</a></li>
+				<li><a href="https://blog.jcoglan.com/2013/04/01/callbacks-promises-and-simplicity/">Callbacks, promises and simplicity</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2>questions()</h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Спасибо!</h2>
+
+			<ul>
+				<li>
+					<!-- <img src="pictures/icon-twitter.png"> -->
+					<a href="https://twitter.com/alexeyraspopov">twitter.com/alexeyraspopov</a>
+				</li>
+				<li>
+					<!-- <img src="pictures/icon-github.png"> -->
+					<a href="https://github.com/alexeyraspopov">github.com/alexeyraspopov</a>
+				</li>
+			</ul>
+
+			<p>Ссылка на эту презентацию &mdash; <a href="http://alexeyraspopov.github.io/talks/fp">alexeyraspopov.github.io/talks/fp</a></p>
+		</div>
+	</section>
+
+	<p class="badge"><a href="https://github.com/shower/shower" target="_blank">Powered by Shower</a></p>
+	<div class="progress"><div></div></div>
+
+	<script src="shower/shower.js"></script>
+</body>
+</html>
