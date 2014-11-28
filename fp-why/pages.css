@@ -1,0 +1,16 @@
+.disclaimer{
+	background: black;
+	color: white;
+	font-weight: bold;
+}
+.disclaimer h2{
+	color: red;
+}
+#sideEffect{
+	-webkit-transform: translateY(-62%);
+	-ms-transform: translateY(-62%);
+	transform: translateY(-62%);
+}
+#communicationSystem{
+	width: 70%;
+}
