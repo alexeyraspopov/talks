@@ -317,7 +317,7 @@
 			<p><strong>Функция высшего порядка</strong> (англ. <em>higher-order function</em>) &mdash; функция, принимающая в качестве аргументов другие функции или возвращающая другую функцию в качестве результата.</p>
 
 			<p class="next">Классические примеры: <code>map</code>, <code>filter</code>, <code>reduce</code></p>
-			<p class="next note">Так же называют операторами (термин из математики)</p>
+			<p class="next">Так же называют операторами (термин из математики)</p>
 		</div>
 	</section>
 
@@ -407,8 +407,6 @@
 				<code>    return target[key];</code>
 				<code>});</code>
 			</pre>
-
-
 		</div>
 	</section>
 
@@ -455,8 +453,6 @@
 		</div>
 	</section>
 
-	<!-- compose -->
-	<!-- применение одной функции к результату другой -->
 	<section class="slide">
 		<div>
 			<h2>Композиция</h2>
@@ -468,6 +464,36 @@
 	</section>
 
 	<!-- реализация -->
+	<section class="slide">
+		<div>
+			<h2>Композиция</h2>
+
+			<pre>
+				<code>function <mark>compose</mark>(f, g){</code>
+				<div class="next">
+					<code>    return <mark>function</mark>(a){</code>
+					<code class="next">        return <mark>f(g(a));</mark></code>
+					<code>    };</code>
+				</div>
+				<code>}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Композиция &mdash; реальность</h2>
+
+			<pre>
+				<code>function <mark>compose</mark>(f, g){</code>
+				<code>    return <mark>function</mark>(){</code>
+				<code>        return <mark>f(<mark class="important">g.apply(this, arguments)</mark>);</mark></code>
+				<code>    };</code>
+				<code>}</code>
+			</pre>
+		</div>
+	</section>
+
 	<section class="slide">
 		<div>
 			<h2>Недостатки</h2>
@@ -490,9 +516,13 @@
 
 			<div class="next">
 				<pre><code>unit(value)<mark>.bind</mark>(fn1)<mark>.bind</mark>(fn2);</code></pre>
-				<p class="note">Не путать "оператор" <code>bind</code> с методом <code>Function::bind</code></p>
+				<p>Не путать "оператор" <code>bind</code> с методом <code>Function::bind</code></p>
 			</div>
 		</div>
+	</section>
+
+	<section class="slide cover w">
+		<div><img src="pictures/call-me-maybe.jpg" class="cover" id="callMeMaybe"></div>
 	</section>
 
 	<section class="slide">
@@ -527,7 +557,33 @@
 		</div>
 	</section>
 
-	<!-- promise -->
+	<section class="slide">
+		<div>
+			<h2>Just &amp; Nothing</h2>
+
+			<pre>
+				<code>Nothing()</code>
+				<code>    .<strong>bind</strong>(alert); // иии ничего не происходит</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Реализация Just</h2>
+
+			<pre>
+				<code>function <mark>Just</mark>(value){</code>
+				<code class="next">    return value && value.isMonad ? value : { bind: function(<mark>morphism</mark>){</code>
+				<code class="next">        return <mark>Just</mark>(<mark>morphism</mark>(value));</code>
+				<code class="next">    } };</code>
+				<code class="next">};</code>
+			</pre>
+
+			<p>Бесплатно, без СМС: <a href="https://github.com/alexeyraspopov/maybe">github.com/alexeyraspopov/maybe</a></p>
+		</div>
+	</section>
+
 	<section class="slide">
 		<div>
 			<h2>Асинхронные операции</h2>
@@ -559,7 +615,7 @@
 
 	<section class="slide">
 		<div>
-			<h2>Асинхронные операции &mdash; функциональный путь</h2>
+			<h2>Асинхронный путь джедая</h2>
 
 			<pre>
 				<code>getUserInfo()</code>
@@ -621,19 +677,6 @@
 		</div>
 	</section>
 
-	<!-- <section class="slide">
-		<div>
-			<h2>Зачем это все?</h2>
-
-			<figure>
-				<blockquote>
-					<p>For that reason we should do (as wise programmers aware of our limitations) our utmost to shorten the conceptual gap between the static program and the dynamic process, to make the correspondence between the program (spread out in text space) and the process (spread out in time) as trivial as possible.</p>
-				</blockquote>
-				<figcaption><a href="http://www.cs.utexas.edu/users/EWD/ewd02xx/EWD215.PDF">Edsger W. Dijkstra, 1968</a></figcaption>
-			</figure>
-		</div>
-	</section> -->
-
 	<section class="slide">
 		<div>
 			<h2>Почему?</h2>
@@ -673,135 +716,6 @@
 			<p>Ссылка на эту презентацию: <a href="http://goo.gl/tDwIpI">goo.gl/tDwIpI</a></p>
 		</div>
 	</section>
-
-	<!--
-
-	<section class="slide">
-		<div>
-			<h2>А что если?</h2>
-
-			<p>Абстрагировать задачу до простого, последовательного превращения input в output?</p>
-		</div>
-	</section>
-
-	<section class="slide">
-		<div>
-			<h2>Превращение</h2>
-
-			<pre>
-				<code class="next">x — входные данные</code>
-				<code class="next">x' — результат работы</code>
-				<code class="next"><mark>x</mark> = x<sub>0</sub> → x<sub>1</sub> → x<sub>2</sub> → ··· → x<sub>n</sub> = <mark>x'</mark></code>
-			</pre>
-		</div>
-	</section>
-
-
-	<section class="slide">
-		<div>
-			<h2>Большие приложения</h2>
-			<figure>
-				<blockquote>
-					<p>The secret to building large apps is never build them. Break them into smaller pieces then assemble into your big app.</p>
-				</blockquote>
-				<figcaption>Justin Meyer, 2010</figcaption>
-			</figure>
-		</div>
-	</section>
-
-	<section class="slide shout">
-		<div>
-			<h2>Динамическое состояние &mdash; зло</h2>
-		</div>
-	</section>
-
-	<section class="slide">
-		<div>
-			<h2>Как нам быть?</h2>
-
-			<p>Функциональное программирование &mdash; парадигма, в которой процесс получения результата описывается как последовательность превращений входных данных с помощью функций.</p>
-		</div>
-	</section>
-
-	<section class="slide">
-		<div>
-			<h2>Проще</h2>
-
-			<p>Предположим, есть две категории данных: String и Number</p>
-
-			<pre>
-				<code class="next">f: String -> Number</code>
-				<code class="next"><mark>vowelsCount</mark>: String -> Number</code>
-			</pre>
-		</div>
-	</section>
-
-	<section class="slide">
-		<div>
-			<h2>Дополним задачу</h2>
-
-			<p>Категории данных: Number, Boolean</p>
-
-			<pre>
-				<code class="next">f: Number -> Boolean</code>
-				<code class="next">isEven: Number -> Boolean</code>
-			</pre>
-		</div>
-	</section>
-
-	<section class="slide">
-		<div>
-			<h2>Композиция</h2>
-
-			<pre>
-				<code>countIsEven: String -> Boolean</code>
-				<code>countIsEven = isEven ∘ vowelsCount</code>
-			</pre>
-		</div>
-	</section>
-
-	<section class="slide">
-		<div>
-			<h2>В JavaScript</h2>
-
-			<pre>
-				<code>function <mark>compose</mark>(f, g){</code>
-				<code>    return function(a){</code>
-				<code>        return <mark>f(g(a))</mark>;</code>
-				<code>    }</code>
-				<code>}</code>
-			</pre>
-
-			<pre class="next"><code>compose(isEven, vowelsCount);</code></pre>
-		</div>
-	</section>
-
-	<section class="slide">
-		<div>
-			<h2>В реальной жизни</h2>
-
-			<pre>
-				<code>function <mark>compose</mark>(f, g){</code>
-				<code>    return function(){</code>
-				<code>        return <mark>f(g<mark class="important">.apply(this, arguments)</mark>)</mark>;</code>
-				<code>    }</code>
-				<code>}</code>
-			</pre>
-		</div>
-	</section>
-
-	<section class="slide">
-		<div>
-			<h2>Интерактивные приложения</h2>
-
-			<ul>
-				<li>Любое <strong>действие</strong> пользователя нацелено на получение результата</li>
-				<li>Действие пользователя &mdash; <strong>входные данные</strong>, которые нужно превратить в результат</li>
-				<li><strong>Превращение данных</strong> в результат &mdash; <strong>поток</strong> действий</li>
-			</ul>
-		</div>
-	</section>
- -->
 
 	<p class="badge"><a href="https://github.com/shower/shower">Powered by Shower</a></p>
 	<div class="progress"><div></div></div>
