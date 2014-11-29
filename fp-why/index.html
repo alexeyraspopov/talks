@@ -625,7 +625,44 @@
 		</div>
 	</section>
 
-	<!-- observable -->
+	<section class="slide">
+		<div>
+			<h2>Много, Асинхронно &mdash; FRP</h2>
+
+			<p><strong>Функциональное Реактивное Программирование</strong> (англ. <em>functional reactive programming</em>) &mdash; парадигма, ориентированная на потоки данных и распространение изменений.</p>
+
+			<p class="next"><strong>Event Stream</strong>, он же <strong>Observable</strong> &mdash; источник сообщений.</p>
+
+			<p class="next">Promise +</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Пишем игру. Управление игроком</h2>
+
+			<pre>
+				<code class="next">document.addEventListener('keydown', function(event){</code>
+				<code class="next">    if(event.keyCode >= 37 &amp;&amp; event.keyCode &lt;= 40){</code>
+				<code class="next">         // Механика игры здесь</code>
+				<code class="next">    }</code>
+				<code class="next">});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Пишем игру. Управление игроком (bacon.js)</h2>
+
+			<pre>
+				<code class="next">$(document).<mark>asEventStream</mark>('keydown')</code>
+				<code class="next">    .<strong>filter</strong>(isArrow)</code>
+				<code class="next">    .<strong>map</strong>(selectDirection)</code>
+				<code class="next">    .<strong>onValue</strong>((direction) => /* Что-то происходит */)</code>
+			</pre>
+		</div>
+	</section>
 
 	<section class="slide">
 		<div>
@@ -674,6 +711,19 @@
 				<code>event('keydown', document)</code>
 				<code>    <mark>.filter</mark>(isArrow)<mark>.map</mark>(coords)<mark>.subscribe</mark>(render);</code>
 			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Что делать?</h2>
+
+			<ul>
+				<li class="next">Знай свой инструмент</li>
+				<li class="next">Пиши чистые функции</li>
+				<li class="next">Разделяй работу на мелкие кусочки</li>
+				<li class="next">Познай светлую сторону Силы</li>
+			</ul>
 		</div>
 	</section>
 
