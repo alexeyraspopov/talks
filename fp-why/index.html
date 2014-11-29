@@ -14,9 +14,9 @@
 		<p>Алексей Распопов</p>
 	</header>
 
-	<section class="slide shout">
+	<section class="slide shout" id="initial">
 		<div>
-			<h2>Functional Programming</h2>
+			<h2>Функциональное Программирование</h2>
 		</div>
 	</section>
 
@@ -305,7 +305,7 @@
 				<code class="next">newArray; // <mark>[data]</mark></code>
 			</pre>
 
-			<p class="note"><a href="https://github.com/facebook/immutable-js">ImmutableJS</a> &mdash; библиотека с набором неизменяемых структур данных. Разрабатывается в Facebook.</p>
+			<p class="next"><a href="https://github.com/facebook/immutable-js">ImmutableJS</a> &mdash; библиотека с набором неизменяемых структур данных. Разрабатывается в Facebook.</p>
 		</div>
 	</section>
 
@@ -390,7 +390,7 @@
 			<h2>Реализация</h2>
 
 			<pre>
-				<code>fn<mark>.bind</mark>(context, arg1, arg2, ...);</code>
+				<code>fn<mark>.bind</mark>(context, arg1, arg2, ...); // VanillaJS</code>
 				<code class="next">_.partial(fn, arg1, arg2, ...); // UnderscoreJS</code>
 			</pre>
 		</div>
@@ -428,24 +428,36 @@
 
 	<section class="slide">
 		<div>
+			<h2>Реализация</h2>
+
+			<ul>
+				<li><a href="http://tech.pro/tutorial/2011/functional-javascript-part-4-function-currying">Functional JavaScript, Part 4: Function Currying (tech.pro)</a></li>
+				<li><a href="https://github.com/folktale/core.lambda/blob/master/lib/index.js#L121-L134">Реализация в библиотеке Folktale</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
 			<h2>Виды композиции</h2>
 
 			<table>
-				<tbody><tr>
-					<th scope="col">&nbsp;</th>
-					<th>Один</th>
-					<th>Много</th>
-				</tr>
-				<tr>
-					<th scope="row">Синхронно</th>
-					<td>Композиция</td>
-					<td>Итерации</td>
-				</tr>
-				<tr>
-					<th scope="row">Асинхронно</th>
-					<td>Promise</td>
-					<td>Observable</td>
-				</tr>
+				<tbody>
+					<tr>
+						<th scope="col">&nbsp;</th>
+						<th>Один</th>
+						<th>Много</th>
+					</tr>
+					<tr>
+						<th scope="row">Синхронно</th>
+						<td>Композиция</td>
+						<td>Итератор</td>
+					</tr>
+					<tr>
+						<th scope="row">Асинхронно</th>
+						<td>Promise</td>
+						<td>Observable</td>
+					</tr>
 				</tbody>
 			</table>
 
@@ -633,7 +645,7 @@
 
 			<p class="next"><strong>Event Stream</strong>, он же <strong>Observable</strong> &mdash; источник сообщений.</p>
 
-			<p class="next">Promise +</p>
+			<p class="next">Promise + Итератор</p>
 		</div>
 	</section>
 
