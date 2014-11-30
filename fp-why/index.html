@@ -586,9 +586,12 @@
 
 			<pre>
 				<code>function <mark>Just</mark>(value){</code>
-				<code class="next">    return value && value.isMonad ? value : { bind: function(<mark>morphism</mark>){</code>
-				<code class="next">        return <mark>Just</mark>(<mark>morphism</mark>(value));</code>
-				<code class="next">    } };</code>
+				<code class="next">    return value && value.isMonad ? value : {</code>
+				<code class="next">        isMonad: true,</code>
+				<code class="next">        bind: function(<mark>morphism</mark>){</code>
+				<code class="next">            return <mark>Just</mark>(<mark>morphism</mark>(value));</code>
+				<code class="next">        }</code>
+				<code class="next">    };</code>
 				<code class="next">};</code>
 			</pre>
 
