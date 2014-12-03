@@ -38,8 +38,8 @@
 			<h2>Дисклеймер</h2>
 
 			<ul>
-				<li><a href="http://worrydream.com/refs/Brooks-NoSilverBullet.pdf">Серебряной пули нет</a></li>
-				<li>Я не разжигаю холивар и не говорю что эти ваши фреймворки &mdash; дерьмо</li>
+				<li><a href="http://worrydream.com/refs/Brooks-NoSilverBullet.pdf">Серебряной пули нет</a> (PDF)</li>
+				<li>Я не разжигаю холивар и не говорю, что эти ваши фреймворки — дерьмо</li>
 				<li>Расскажу только фундаментальные вещи, чтобы не взорвать ваш мозг</li>
 			</ul>
 		</div>
@@ -70,12 +70,26 @@
 		</div>
 	</section>
 
-	<section class="slide">
+	<section class="slide shout" id="communicationSystem">
 		<div>
-			<h2>Система коммуникации</h2>
+			<h2>
+				<a href="http://cm.bell-labs.com/cm/ms/what/shannonday/shannon1948.pdf">
+					Claude Shannon:<br>
+					A Mathematical Theory of Communication
+				</a>
+			</h2>
+		</div>
+		<style>
+			#communicationSystem h2 {
+				line-height:1.5;
+				font-size:100px;
+				}
+		</style>
+	</section>
 
-			<p><img src="pictures/communication.JPG" id="communicationSystem"></p>
-			<p><a href="http://cm.bell-labs.com/cm/ms/what/shannonday/shannon1948.pdf">Claude Shannon: A Mathematical Theory of Communication</a></p>
+	<section class="slide cover w">
+		<div>
+			<img src="pictures/communication.png">
 		</div>
 	</section>
 
@@ -140,7 +154,7 @@
 			<h2>Расширяемое решение</h2>
 
 			<pre>
-				<code>var numbers = [1, 2, 3, 4, 5, 6, 7, 8, ...];</code>
+				<code>var numbers = [1, 2, 3, 4, 5, 6, 7, 8, …];</code>
 			</pre>
 			<pre>
 				<code>numbers</code>
@@ -157,8 +171,7 @@
 			<h2>Вместо императивного ужаса</h2>
 
 			<pre>
-				<code>var numbers = [1, 2, 3, 4, 5, 6, 7, 8, ...], sum = 0, num;</code>
-				<code>&nbsp;</code>
+				<code>var numbers = [1, 2, 3, 4, 5, 6, 7, 8, …], sum = 0, num;</code>
 				<code><strong>for</strong>(var i = 0; i &lt; numbers.length; i++){</code>
 				<code>    num = numbers[i];</code>
 				<code>    num *= num;</code>
@@ -176,8 +189,7 @@
 			<h2>И что оно делает?</h2>
 
 			<pre>
-				<code>var numbers = [1, 2, 3, 4, 5, 6, 7, 8, ...], sum = 0, num;</code>
-				<code>&nbsp;</code>
+				<code>var numbers = [1, 2, 3, 4, 5, 6, 7, 8, …], sum = 0, num;</code>
 				<code><strong>for</strong>(var i = 0; i &lt; numbers.length; i++){</code>
 				<code>    num = numbers[i];</code>
 				<code>    <mark>num *= num</mark>;</code>
@@ -289,7 +301,7 @@
 			<pre>
 				<code>var array = [];</code>
 				<code class="next">array.push(data);</code>
-				<code class="next">array; // [data]</code>
+				<code class="next">array; <mark class="comment">// [data]</mark></code>
 			</pre>
 		</div>
 	</section>
@@ -345,7 +357,7 @@
 				<code>}</code>
 			</pre>
 
-			<pre class="next"><code>property('length', [1, 2]); // 2</code></pre>
+			<pre class="next"><code>property('length', [1, 2]); <mark class="comment">// 2</mark></code></pre>
 		</div>
 	</section>
 
@@ -378,9 +390,9 @@
 
 			<pre>
 				<code>var username = <mark>partial</mark>(property, 'name');</code>
-				<code class="next"><mark>username</mark>({name: 'Alex'}); // 'Alex'</code>
+				<code class="next"><mark>username</mark>({name: 'Alex'}); <mark class="comment">// 'Alex'</mark></code>
 				<code class="next">map(<mark>username</mark>, listOfUsers);</code>
-				<code class="next">// [{name: 'Ann'}, {name: 'Max'}] -> ['Ann', 'Max']</code>
+				<code class="next"><mark class="comment">// [{name: 'Ann'}, {name: 'Max'}] -> ['Ann', 'Max']</mark></code>
 			</pre>
 		</div>
 	</section>
@@ -388,10 +400,13 @@
 	<section class="slide">
 		<div>
 			<h2>Реализация</h2>
-
-			<pre>
-				<code>fn<mark>.bind</mark>(context, arg1, arg2, ...); // VanillaJS</code>
-				<code class="next">_.partial(fn, arg1, arg2, ...); // UnderscoreJS</code>
+			<pre class="next">
+				<code><mark class="comment">// VanillaJS<mark class="comment"></code>
+				<code>fn<mark>.bind</mark>(context, arg1, arg2, ...);</code>
+			</pre>
+			<pre class="next">
+				<code><mark class="comment">// UnderscoreJS</mark></code>
+				<code>_.partial(fn, arg1, arg2, ...);</code>
 			</pre>
 		</div>
 	</section>
@@ -417,11 +432,11 @@
 			<pre>
 				<code>var duration = property('duration');</code>
 				<code class="next">// <mark>(target) => target['duration'];</mark></code>
-				<code class="next">duration({ duration: 10, ... }); // 10</code>
+				<code class="next">duration({ duration: 10, ... }); <mark class="comment">// 10</mark></code>
 			</pre>
 
 			<pre class="next">
-				<code>property('name', {name: 'Sam'}); // 'Sam'</code>
+				<code>property('name', {name: 'Sam'}); <mark class="comment">// 'Sam'</mark></code>
 			</pre>
 		</div>
 	</section>
@@ -528,7 +543,7 @@
 
 			<div class="next">
 				<pre><code>unit(value)<mark>.bind</mark>(fn1)<mark>.bind</mark>(fn2);</code></pre>
-				<p>Не путать "оператор" <code>bind</code> с методом <code>Function::bind</code></p>
+				<p>Не путать оператор <code>bind</code> с методом <code>Function::bind</code></p>
 			</div>
 		</div>
 	</section>
@@ -575,7 +590,7 @@
 
 			<pre>
 				<code>Nothing()</code>
-				<code>    .<strong>bind</strong>(alert); // иии ничего не происходит</code>
+				<code>    .<strong>bind</strong>(alert); <mark class="comment">// иии ничего не происходит</mark></code>
 			</pre>
 		</div>
 	</section>
@@ -586,7 +601,7 @@
 
 			<pre>
 				<code>function <mark>Just</mark>(value){</code>
-				<code class="next">    return value && value.isMonad ? value : {</code>
+				<code class="next">    return value &amp;&amp; value.isMonad ? value : {</code>
 				<code class="next">        isMonad: true,</code>
 				<code class="next">        bind: function(<mark>morphism</mark>){</code>
 				<code class="next">            return <mark>Just</mark>(<mark>morphism</mark>(value));</code>
@@ -659,7 +674,7 @@
 			<pre>
 				<code class="next">document.addEventListener('keydown', function(event){</code>
 				<code class="next">    if(event.keyCode >= 37 &amp;&amp; event.keyCode &lt;= 40){</code>
-				<code class="next">         // Механика игры здесь</code>
+				<code class="next">         <mark class="comment">// Механика игры здесь</mark></code>
 				<code class="next">    }</code>
 				<code class="next">});</code>
 			</pre>
@@ -681,10 +696,7 @@
 
 	<section class="slide">
 		<div>
-			<h2>Drag'n'drop на FRP</h2>
-
-			<p>Пример на JSFiddle &mdash; <a href="http://jsfiddle.net/TFPge/1/">jsfiddle.net/TFPge/1/</a></p>
-
+			<h2>Drag’n’drop на FRP, см. <a href="http://jsfiddle.net/TFPge/1/">демо</a></h2>
 			<pre class="next">
 			    <code>var draggingDeltas = <mark>startDrag</mark>.<strong>flatMap</strong>(function() {</code>
 			    <code>    return html.<mark>asEventStream</mark>('mousemove')</code>
@@ -702,11 +714,11 @@
 			<h2>Один</h2>
 
 			<pre>
-				<code>// один, синхронно</code>
+				<code><mark class="comment">// Один, синхронно</mark></code>
 				<code>maybe(user.bio)<mark>.bind</mark>(prettyBio)<mark>.bind</mark>(output);</code>
 			</pre>
 			<pre>
-				<code>// один, асинхронно</code>
+				<code><mark class="comment">// Один, асинхронно</mark></code>
 				<code>fetch('/user')<mark>.then</mark>(tweetsByUser)<mark>.then</mark>(filteredRetweets);</code>
 			</pre>
 		</div>
@@ -717,12 +729,12 @@
 			<h2>Много</h2>
 
 			<pre>
-				<code>// много, синхронно</code>
+				<code><mark class="comment">// Много, синхронно</mark></code>
 				<code>numbers</code>
 				<code>    <mark>.filter</mark>(isEven)<mark>.map</mark>(square)<mark>.reduce</mark>(sum, 0);</code>
 			</pre>
 			<pre>
-				<code>// много, асинхронно</code>
+				<code><mark class="comment">// Много, асинхронно</mark></code>
 				<code>event('keydown', document)</code>
 				<code>    <mark>.filter</mark>(isArrow)<mark>.map</mark>(coords)<mark>.subscribe</mark>(render);</code>
 			</pre>
@@ -777,8 +789,12 @@
 				<li><a href="https://twitter.com/alexeyraspopov" target="_blank">twitter.com/alexeyraspopov</a></li>
 				<li><a href="https://github.com/alexeyraspopov" target="_blank">github.com/alexeyraspopov</a></li>
 			</ul>
+		</div>
+	</section>
 
-			<p>Ссылка на эту презентацию: <a href="http://goo.gl/tDwIpI">goo.gl/tDwIpI</a></p>
+	<section class="slide shout">
+		<div>
+			<h2><a href="http://goo.gl/tDwIpI">goo.gl/tDwIpI</a></h2>
 		</div>
 	</section>
 
