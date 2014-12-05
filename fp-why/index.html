@@ -369,7 +369,7 @@
 				<code>var listOfUsers = [{name: 'Ann'}, {name: 'Max'}, ...];</code>
 				<div class="next">
 					<code>map(<mark>function(target){</mark></code>
-					<code>    return <mark class="next important">pluck('name', target)</mark>;</code>
+					<code>    return <mark class="next important">property('name', target)</mark>;</code>
 					<code>}, listOfUsers);</code>
 				</div>
 			</pre>
@@ -454,6 +454,16 @@
 
 	<section class="slide">
 		<div>
+			<h2>Композиция</h2>
+
+			<p><strong>Композиция</strong> (англ. <em>composition</em>) &mdash; процесс применения одной функции к результату другой.</p>
+
+			<pre class="next"><code>fn1(fn2(value));</code></pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
 			<h2>Виды композиции</h2>
 
 			<table>
@@ -477,16 +487,6 @@
 			</table>
 
 			<p>Прежде чем писать код &mdash; выбери <em>правильный</em> инструмент!</p>
-		</div>
-	</section>
-
-	<section class="slide">
-		<div>
-			<h2>Композиция</h2>
-
-			<p><strong>Композиция</strong> (англ. <em>composition</em>) &mdash; процесс применения одной функции к результату другой.</p>
-
-			<pre class="next"><code>fn1(fn2(value));</code></pre>
 		</div>
 	</section>
 
@@ -526,7 +526,7 @@
 			<h2>Недостатки</h2>
 
 			<ul>
-				<li>Непрактична для длинных цепочек</li>
+				<li>Непрактична для длинных цепочек (связывает только две функции)</li>
 				<li class="next">Обратный порядок описания</li>
 				<li class="next">Нет возможности управления потоком (явные вызовы)</li>
 			</ul>
@@ -746,7 +746,7 @@
 			<h2>Что делать?</h2>
 
 			<ul>
-				<li class="next">Знай свой инструмент</li>
+				<!-- <li class="next">Знай свой инструмент</li> -->
 				<li class="next">Пиши чистые функции</li>
 				<li class="next">Разделяй работу на мелкие кусочки</li>
 				<li class="next">Познай светлую сторону Силы</li>
@@ -772,6 +772,7 @@
 			<h2>Интересно</h2>
 
 			<ul>
+				<li><a href="https://github.com/dgelong">Project Dgelong</a></li>
 				<li><a href="http://www.smashingmagazine.com/2014/07/02/dont-be-scared-of-functional-programming/">Jonathon Morgan: Don’t Be Scared of Functional Programming</a></li>
 				<li><a href="http://shop.oreilly.com/product/0636920028857.do">Functional JavaScript (by Michael Fogus)</a></li>
 				<li><a href="https://www.youtube.com/watch?v=XcS-LdEBUkE">James Coglan: Practical Functional Programming: Pick Two</a></li>
