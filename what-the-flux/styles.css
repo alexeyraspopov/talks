@@ -1,0 +1,60 @@
+.shout.link h2{
+	font-size: 100px;
+	line-height: 1.5;
+}
+.cover.w{
+	background-color: white;
+}
+.cover.fit img{
+	height: 100%;
+}
+.flux-accent{
+	color: #318435;
+}
+.slide.shout h2{
+	font-weight: normal;
+}
+.flux-box{
+	display: inline-block;
+	position: relative;
+	padding: 25px;
+	font-size: 60px;
+	color: white;
+	border-radius: 10px;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+}
+.flux-box-target{
+	animation: pulse 1s infinite;
+}
+.flux-box:not(:last-child)::after{
+	content: '';
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 100%;
+	border-top: 10px solid transparent;
+	border-left: 15px solid rgba(0, 0, 0, 0.8);
+	border-bottom: 10px solid transparent;
+	transform: translate(125%, -50%);
+}
+.flux-box:not(:last-child){
+	margin-right: 50px;
+}
+.flux-box-action{
+	background-color: #77B6C8;
+}
+.flux-box-dispatcher{
+	background-color: #424041;
+}
+.flux-box-store{
+	background-color: #2E4451;
+}
+.flux-box-view{
+	background-color: #5FAF6A;
+}
+
+@keyframes pulse{
+	50% {
+		box-shadow: 0 0 10px 2px red;
+	}
+}

@@ -1,0 +1,10 @@
+{
+  "name": "what-the-flux",
+  "version": "0.0.1",
+  "description": "Talk about Flux",
+  "license": "MIT",
+  "dependencies": {
+    "shower-core": "^1.0.7",
+    "shower-ribbon": "^1.0.11"
+  }
+}

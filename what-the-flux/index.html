@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<title>What the Flux</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="node_modules/shower-ribbon/styles/screen.css">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body class="list">
+
+	<header class="caption">
+		<h1>What the Flux</h1>
+		<p><a href="https://twitter.com/alexeyraspopov">Alexey Raspopov</a>, <a href="http://datarobot.com">DataRobot</a>.</p>
+		<p class="badge"><a href="https://github.com/shower/shower">Powered by Shower</a></p>
+	</header>
+
+	<section class="slide shout">
+		<div>
+			<h2>What the F***</h2>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2>What the <span class="flux-accent">Flux</span></h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Кто я?</h2>
+
+			<ul>
+				<li>Front-end разработчик в <a href="http://datarobot.com">DataRobot</a></li>
+				<li>4+ года опыта в разработке SPA</li>
+				<li>Фанат Vanilla JS</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>О чем?</h2>
+
+			<ul>
+				<li>Поговорим об архитектуре</li>
+				<li class="next">Подумаем, на что мы тратим много времени</li>
+				<li class="next">Не говорим о сервере</li>
+				<li class="next">Не затрагиваем UI (почти)</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Все что нужно знать о UI</h2>
+
+			<pre><code>render = (<mark>Data</mark>) => <mark>UI</mark>;</code></pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Идеальный мир</h2>
+
+			<pre>
+				<code>render = (Data) => UI;</code>
+				<code>update = (<mark>State</mark>, <mark>Action</mark>) => <mark>NewState</mark>;</code>
+			</pre>
+
+			<pre>
+				<code class="next">Actions = [Update This, Add That, Delete Shit, ...];</code>
+				<code class="next"><mark>AppState</mark> = Actions.<mark class="important">reduce</mark>(update, InitialState);</code>
+				<code class="next">AppState.subscribe(<mark>render</mark>);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide shout link">
+		<div>
+			<h2><a href="http://dces.essex.ac.uk/technical-reports/2004/csm-411.pdf">Amnon H Eden:<br>Abstraction Classes in Software Design</a></h2>
+		</div>
+	</section>
+
+	<section class="slide cover w">
+		<div>
+			<img src="assets/abstraction-classes.png" class="cover">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Архитектура и дизайн</h2>
+			<ul>
+				<li>Архитектура — набор четко определенных ограничений (правил)</li>
+				<li>Дизайн — набор деталей интерфейса и элементов системы</li>
+			</ul>
+
+			<p class="next">Flux — архитектура, работа с диспатчером — дизайн</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Flux</h2>
+
+			<ul>
+				<li>Паттерн, не фреймворк</li>
+				<li class="next">Не MVC</li>
+				<li class="next">Взял все лучшее из <a href="http://martinfowler.com/eaaDev/EventSourcing.html">Event Sourcing</a> и <a href="http://martinfowler.com/bliki/CQRS.html">CQRS</a></li>
+				<li class="next">Отделяет бизнес-логику, работу с сервером и рендеринг в отдельные слои</li>
+				<!-- мутации и асинхронную работу -->
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Flux для вас</h2>
+
+			<ul>
+				<li class="next">Данные на экране меняются постоянно</li>
+				<li class="next">Одни и те же данные могут быть показаны в разном виде</li>
+				<li class="next">Много асинхронных действий</li>
+				<li class="next">Проект большой и необходим саппорт</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Основные идеи</h2>
+
+			<ul>
+				<li class="next">Однонаправленный поток данных</li>
+				<li class="next">Разделение процессов чтения и записи данных</li>
+				<li class="next">Представление состояния как последовательности событий</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2><span class="flux-box flux-box-store flux-box-target">Store</span><span class="flux-box flux-box-view">View</span></h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Stores</h2>
+
+			<ul>
+				<li>Синглтон</li>
+				<li class="next">Не модель. <em>Содержит</em> одну или более моделей</li>
+				<li class="next">Кеш состояния</li>
+				<li class="next">Имеет геттеры, не имеет сеттеров</li>
+				<li class="next">Знает только о Диспатчере</li>
+				<li class="next">Может доставать данные из других сторов</li>
+				<li class="next">Изменяют состояние моделей на основе экшнов</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2><span class="flux-box flux-box-dispatcher flux-box-target">Dispatcher</span><span class="flux-box flux-box-store">Store</span><span class="flux-box flux-box-view">View</span></h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Dispatcher</h2>
+
+			<ul>
+				<li>Центральный объект системы</li>
+				<li>Принимает все экшны</li>
+				<li>Отправляет каждый экшн <em>всем</em> сторам</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Dispatcher</h2>
+
+			<pre>
+				<code>Flux = require('<span class="flux-accent">flux</span>');</code>
+				<code>&nbsp;</code>
+				<code>Dispatcher = new Flux.Dispatcher();</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2><a href="https://facebook.github.io/flux/docs/dispatcher.html#content">Dispatcher API</a></h2>
+
+			<pre>
+				<code class="next">Dispatcher.<mark class="important">dispatch</mark>(<mark>action</mark>);</code>
+				<code class="next">Dispatcher.<mark class="important">register</mark>((<mark>action</mark>) => ...);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2><span class="flux-box flux-box-action flux-box-target">Action</span><span class="flux-box flux-box-dispatcher">Dispatcher</span><span class="flux-box flux-box-store">Store</span><span class="flux-box flux-box-view">View</span></h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Actions</h2>
+
+			<ul>
+				<li>Просто объект</li>
+				<li class="next">В идеале выглядит как заметка в газете</li>
+				<ul>
+					<li class="next">Заголовок рассказывает о том, что произошло</li>
+					<li class="next">Тело несет дополнительную информацию о событии</li>
+				</ul>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Action payload</h2>
+
+			<pre>
+				<code>{</code>
+				<code>    type: ActionTypes.<mark>DEPOSITED_INTO_ACCOUNT</mark></code>
+				<code>    data: {</code>
+				<code>        accountID: 13,</code>
+				<code>        amount: 500,</code>
+				<code>        timestamp: 1433482935845</code>
+				<code>    }</code>
+				<code>}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Action Types</h2>
+
+			<p>Важна семантика</p>
+
+			<ul>
+				<li>Всегда в прошлом времени</li>
+				<li>Если возможно — в пассивной форме</li>
+				<li class="next">Только в терминах предметной области</li>
+				<li class="next">Говорит о том, что произошло, не сеттер</li>
+				<li class="next">В реализации лучше использовать константы</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Константы</h2>
+
+			<pre><code>const TODO_CREATED = 'TODO_CREATED';</code></pre>
+
+			<ul>
+				<li>Не обязательны, можно использовать простые строки</li>
+				<li>С помощью констант легче избежать конфликт имен</li>
+				<li>Неплохая возможность подключить статический анализ</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Плохие имена</h2>
+
+			<pre>
+				<code>SHOW_LOAD_SPINNER</code>
+				<code>OPEN_MODAL</code>
+				<code>CREATE_TODO</code>
+				<code>LOAD_USERS</code>
+				<code>UPDATE_SOME_BULLSHIT</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Хорошие имена</h2>
+
+			<pre>
+				<code>TODO_CREATED</code>
+				<code>DEPOSITED_INTO_ACCOUNT</code>
+				<code>WITHDRAWAL_FAILED</code>
+				<code>TOKEN_RECEIVED</code>
+				<code>USER_INFO_UPDATED</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2><a href="https://github.com/STRML/keyMirror">Key Mirror</a></h2>
+
+			<pre>
+				<code>ActionTypes = keyMirror({</code>
+				<code>    <mark>TODO_CREATED</mark>: null,</code>
+				<code>    <mark>LIST_REQUESTED</mark>: null</code>
+				<code>});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Наивная реализация</h2>
+
+			<pre>
+				<code>Dispatcher.register(function(action){</code>
+				<code>    switch (action.type) {</code>
+				<code>    case <mark>TODO_ADDED</mark>:</code>
+				<code>        // мутации</code>
+				<code>        break;</code>
+				<code>    case <mark>TODO_REMOVED</mark>:</code>
+				<code>        // мутации</code>
+				<code>        break;</code>
+				<code>    }</code>
+				<code>});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Умная огранизация</h2>
+
+			<pre>
+				<code>Store = {</code>
+				<code>    [ActionTypes.<mark>TODO_ADDED</mark>](state, action) {},</code>
+				<code>    [ActionTypes.<mark>TODO_REMOVED</mark>](state, action) {}</code>
+				<code>};</code>
+			</pre>
+
+			<p class="next"><a href="https://github.com/alexeyraspopov/flux-stateful">Flux Stateful</a> — хорошие сторы</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Action Creators</h2>
+
+			<ul>
+				<li>Слой модулей, создающих экшны (Action)</li>
+				<li class="next">Знает о Диспатчере</li>
+				<li class="next">Знает о внешнем API (например, сервер)</li>
+				<li class="next">Может работать с асинхронными операциями</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide cover w">
+		<div><img src="assets/actors.png" class="cover"></div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Action Creators</h2>
+
+			<pre>
+				<code>var Dispatcher = require('AppDispatcher');</code>
+				<div class="next">
+					<code>&nbsp;</code>
+					<code>exports.<mark>addItemInCard</mark> = function(item){</code>
+				</div>
+				<code class="next">    Dispatcher.<mark class="important">dispatch</mark>({</code>
+				<code class="next">        type: <mark>ITEM_ADDED_IN_CARD</mark>,</code>
+				<div class="next">
+					<code>        data: item</code>
+					<code>    });</code>
+					<code>};</code>
+				</div>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>WebAPI</h2>
+
+			<ul>
+				<li>Изолированный от системы слой кода</li>
+				<li>Работает с внешним миром (сервер, внешнее окружение и т.д.)</li>
+				<li>Только асинхронное API</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Async Action Creators</h2>
+
+			<pre>
+				<code>exports.<mark>requestUserInfo</mark> = function(user){</code>
+				<code class="next">  dispatch(<mark>USER_INFO_LOADING_STARTED</mark>, user);</code>
+				<code class="next">  WebAPI.loadUserInfo(user).<mark>then</mark>(</code>
+				<code class="next">    (info) => dispatch(<mark>USER_INFO_LOADED</mark>, info),</code>
+				<code class="next">    (error) => dispatch(<mark>USER_INFO_LOADING_FAILED</mark>, error)</code>
+				<div class="next">
+					<code>  );</code>
+					<code>};</code>
+				</div>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2>Имплементации</h2>
+		</div>
+	</section>
+
+	<section class="slide cover w fit">
+		<div><img src="assets/frameworks-everywhere.jpg" class="cover"></div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Что не так с современными JS-фреймворками</h2>
+
+			<ul>
+				<li class="next">Большинство фреймворков делают упор на уменьшение бутстрапа</li>
+				<li class="next">Вы больше времени тратите на работу с багами, чем на бутстрап системы</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide cover w">
+		<div><img src="assets/occam-victims.jpg" class="cover"></div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Популярные</h2>
+
+			<ul>
+				<li><a href="https://github.com/spoike/refluxjs">Reflux</a> <strong>(Just NO!)</strong></li>
+				<li><a href="https://github.com/yahoo/fluxible">Fluxible</a></li>
+				<li><a href="https://github.com/acdlite/flummox">Flummox</a></li>
+				<li><a href="https://github.com/goatslacker/alt">Alt</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Profits</h2>
+
+			<ul>
+				<li>Предсказуемость</li>
+				<li class="next">Тестируемость</li>
+				<li class="next">Single Source of Truth</li>
+				<li class="next">Flux не заботится о UI (можно использовать все)</li>
+				<li class="next">Минимизация усилий по расширению функционала</li>
+				<li class="next">Логгирование из коробки</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide shout link">
+		<div>
+			<h2><a href="https://github.com/nextminds/FluxRecorder">Flux Recorder</a></h2>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2><iframe width="960" height="540" src="https://www.youtube.com/embed/DtAbd305Oyk?rel=0&amp;controls=0" frameborder="0" allowfullscreen></iframe></h2>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div><h2>
+			<iframe width="960" height="540" src="https://www.youtube.com/embed/5yHFTN-_mOo?rel=0&amp;controls=0" frameborder="0" allowfullscreen></iframe>
+		</h2></div>
+	</section>
+
+	<section class="slide shout link">
+		<div>
+			<h2><a href="https://github.com/gilbox/vizone">Vizone DevTool</a></h2>
+		</div>
+	</section>
+
+	<section class="slide cover w">
+		<div><img src="assets/vizone.png" class="cover"></div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Ссылки</h2>
+
+			<ul>
+				<li><a href="https://github.com/facebook/flux">github.com/facebook/flux</a></li>
+				<li><a href="https://github.com/alexeyraspopov/flux-stateful">github.com/alexeyraspopov/flux-stateful</a></li>
+				<li><a href="https://github.com/voronianski/flux-comparison">github.com/voronianski/flux-comparison</a></li>
+				<li><a href="https://medium.com/@goatslacker/principles-of-flux-ea872bc20772">Josh Perez: Principles of Flux</a></li>
+				<li><a href="https://medium.com/@dan_abramov/the-case-for-flux-379b7d1982c6">Dan Abramov: The Case for Flux</a></li>
+				<li><a href="https://medium.com/@cassiozen/flux-cargo-culting-3cae9ff27c0c">Cássio Zen: Flux Cargo-Culting</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Спасибо!</h2>
+
+			<ul>
+				<li>
+					<a href="https://twitter.com/alexeyraspopov">twitter.com/alexeyraspopov</a>
+				</li>
+				<li>
+					<a href="https://github.com/alexeyraspopov">github.com/alexeyraspopov</a>
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<div class="progress"><div></div></div>
+	<script src="node_modules/shower-core/shower.min.js"></script>
+</body>
+</html>
