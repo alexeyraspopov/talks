@@ -321,7 +321,7 @@
 			<h2>Наивная реализация</h2>
 
 			<pre>
-				<code>Dispatcher.register(function(action){</code>
+				<code>Dispatcher.register(function(action) {</code>
 				<code>    switch (action.type) {</code>
 				<code>    case <mark>TODO_ADDED</mark>:</code>
 				<code>        // мутации</code>
@@ -331,6 +331,25 @@
 				<code>        break;</code>
 				<code>    }</code>
 				<code>});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Чистая функция</h2>
+
+			<pre>
+				<code>function CounterStore(<mark>state = 0</mark>, <mark>action</mark>) {</code>
+				<div class="next">
+					<code>    switch (action.type) {</code>
+					<code>    case INCREMENTED:</code>
+					<code class="next">        return <mark>state + 1</mark>;</code>
+					<code>    case DECREMENTED:</code>
+					<code class="next">        return <mark>state – 1</mark>;</code>
+					<code>    }</code>
+				</div>
+				<code>}</code>
 			</pre>
 		</div>
 	</section>
