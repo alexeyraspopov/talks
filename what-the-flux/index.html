@@ -340,12 +340,12 @@
 			<h2>Чистая функция</h2>
 
 			<pre>
-				<code>function UkraineStore(<mark>state = 0</mark>, <mark>action</mark>) {</code>
+				<code>function CounterStore(<mark>state = 0</mark>, <mark>action</mark>) {</code>
 				<div class="next">
 					<code>    switch (action.type) {</code>
-					<code>    case ЗРАДА:</code>
+					<code>    case DECREMENT:</code>
 					<code class="next">        return <mark>state – 1</mark>;</code>
-					<code>    case ПЕРЕМОГА:</code>
+					<code>    case INCREMENT:</code>
 					<code class="next">        return <mark>state + 1</mark>;</code>
 					<code>    }</code>
 				</div>
