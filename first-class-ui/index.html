@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>First-class UI</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="node_modules/shower-ribbon/styles/screen.css">
+</head>
+<body class="list">
+
+	<header class="caption">
+		<h1>First-class UI</h1>
+		<p><a href="https://github.com/alexeyraspopov">Alexey Raspopov</a>, DataRobot.</p>
+	</header>
+
+	<section class="slide">
+		<div>
+			<h2>We are wise developers</h2>
+
+			<figure>
+				<blockquote>
+					<p>
+						<span class="next">Our intellectual powers are rather geared to master <mark>static relations</mark> and that our powers to visualize <mark>processes evolving in time</mark> are relatively poorly developed.</span> <span class="next">For that reason we <strong>should do</strong> (as wise programmers aware of our limitations) our utmost to shorten the conceptual gap between <strong>the static program</strong> and <strong>the dynamic process</strong></span><span class="next">, to make the correspondence between the program (spread out in text space) and the process (spread out in time) <strong>as trivial as possible</strong>.</span>
+					</p>
+				</blockquote>
+				<figcaption>Dijkstra (1968) "<a href="http://www.cs.utexas.edu/users/EWD/ewd02xx/EWD215.PDF" target="_blank">A Case against the GO TO Statement</a>"</figcaption>
+			</figure>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Definition of client-side architecture</h2>
+
+			<pre>
+				<code class="next">render = (Data) => UI;</code>
+				<code class="next">update = (<mark>State</mark>, <mark>Action</mark>) => <mark>NewState</mark>;</code>
+				<code class="next"><mark class="comment">// Actions = [Add this, Remove That, Update something, ...]</mark></code>
+				<code class="next"><mark>AppState</mark> = Actions.<mark class="important">reduce</mark>(update, <mark>InitialState</mark>);</code>
+				<code class="next">AppState.subscribe(render);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>First-class structures</h2>
+
+			<pre>
+				<code class="next"><mark class="comment">// User = { name }</mark></code>
+				<code class="next"><mark class="comment">// UserInfo = (User) => UI</mark></code>
+				<code class="next"><strong>function</strong> UserInfo(<mark>user</mark>) {</code>
+				<code class="next">    return { type: 'label', text: <mark>user.name</mark> };</code>
+				<code class="next">}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>UI composition</h2>
+
+			<pre>
+				<code><strong>function</strong> Header(user) {</code>
+				<code>    return { type: '<mark>div</mark>', children: [<mark>UserInfo(user)</mark>] };</code>
+				<code>}</code>
+			</pre>
+
+			<pre><code>Header(someUserInfo);</code></pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Friendly syntax</h2>
+
+			<pre>
+				<code><strong>function</strong> Header(user) {</code>
+				<code>    return (&lt;<mark>div</mark>&gt;</code>
+				<code>        &lt;<mark>UserInfo</mark> user={user} /&gt;</code>
+				<code>    &lt;/<mark>div</mark>&gt;);</code>
+				<code>}</code>
+			</pre>
+
+			<pre><code>&lt;<mark>Header</mark> user={someUserInfo} /&gt;</code></pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Templates</h2>
+
+			<ul>
+				<li>Always consist of a big amount of elements</li>
+				<li>Implicitly depend on <em>some</em> context</li>
+				<li>Are not reusable</li>
+				<li>Have additional syntax</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Components as functions or first-class UI</h2>
+
+			<ul>
+				<li>As small as possible</li>
+				<li>Explicitly depend on data which they receives</li>
+				<li>Full JS support and all possibilites of Functional Programming</li>
+				<li>Reusable by default</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>How moving from Angular to React looks like</h2>
+
+			<img src="pull-request.png">
+		</div>
+	</section>
+
+	<div class="progress"><div></div></div>
+	<script src="node_modules/shower-core/shower.min.js"></script>
+</body>
+</html>

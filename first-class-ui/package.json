@@ -1,0 +1,15 @@
+{
+  "name": "why-i-did-it",
+  "version": "1.0.0",
+  "description": "Why I did it",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexey Raspopov",
+  "license": "MIT",
+  "dependencies": {
+    "shower-core": "^1.0.7",
+    "shower-ribbon": "^1.0.11"
+  }
+}
