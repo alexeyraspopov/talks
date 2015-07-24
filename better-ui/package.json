@@ -1,0 +1,15 @@
+{
+  "name": "react",
+  "version": "0.0.1",
+  "description": "react talk",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexey Raspopov",
+  "license": "MIT",
+  "dependencies": {
+    "shower-core": "^1.0.7",
+    "shower-ribbon": "^1.0.11"
+  }
+}

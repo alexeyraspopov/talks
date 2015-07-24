@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Better UI</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="node_modules/shower-ribbon/styles/screen.css">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body class="list">
+	<!--
+		Debug class on <body> enables
+		cyan grid on slides
+		-->
+	<header class="caption">
+		<h1>Better UI</h1>
+		<p><a href="http://alexeyraspopov.github.io">Alexey Raspopov</a>, DataRobot.</p>
+	</header>
+
+	<section class="slide shout">
+		<div>
+			<h2>Better UI</h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Agenda</h2>
+
+			<ul>
+				<!-- Why we are here? -->
+				<li>A brief history of UI</li>
+				<!-- Benefits that we already have -->
+				<li>First-class citizens</li>
+				<!-- Shared Mutable State — evil -->
+				<li>Immutability</li>
+				<!-- React to the rescue -->
+				<li>Better UI management</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Static web pages</h2>
+
+			<img src="pictures/nytimes-1996.jpg" class="place b">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>First web apps</h2>
+
+			<img src="pictures/online-shop.jpg" class="place b">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>AJAX driven apps</h2>
+
+			<img src="pictures/gmail-2006.jpg" class="place b">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Single-page & mobile apps</h2>
+
+			<img src="pictures/discourse.png" class="place b">
+		</div>
+	</section>
+
+	<section class="slide">
+		<style scoped>
+			table{
+				max-width: 80%;
+				margin: 0 auto;
+			}
+			td, th{
+				text-align: center;
+			}
+			tr:nth-child(n+2) th{
+				text-align: left;
+			}
+			.indicator{
+				display: inline-block;
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				margin-bottom: -5px;
+			}
+			.indicator-low{
+				background-color: green;
+			}
+			.indicator-medium{
+				background-color: yellow;
+			}
+			.indicator-high{
+				background-color: red;
+			}
+		</style>
+		<div>
+			<h2>Tradeoffs</h2>
+
+			<table>
+			<tr>
+				<th scope="col">Apps</th>
+				<th>Load</th>
+				<th>Dev effort</th>
+				<th>UX</th>
+			</tr>
+			<tr>
+				<th scope="row">Server-side</th>
+				<td><span class="indicator indicator-medium"></span></td>
+				<td><span class="indicator indicator-low"></span></td>
+				<td><span class="indicator indicator-high"></span></td>
+			</tr>
+			<tr>
+				<th scope="row">Ajax-based</th>
+				<td><span class="indicator indicator-low"></span></td>
+				<td><span class="indicator indicator-high"></span></td>
+				<td><span class="indicator indicator-medium"></span></td>
+			</tr>
+			<tr>
+				<th scope="row">Single-page</th>
+				<td><span class="indicator indicator-high"></span></td>
+				<td><span class="indicator indicator-medium"></span></td>
+				<td><span class="indicator indicator-low"></span></td>
+			</tr>
+			</table>
+
+			<p class="next"><br>Let's use Server-side apps' dev effort for creating Single-page apps.</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>UI as a <em>complex</em> structure</h2>
+
+			<ul>
+				<li>Has composition</li>
+				<li>Requires reusability</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<style scoped>
+			strike{
+				opacity: 0.4;
+			}
+		</style>
+		<div>
+			<h2>HTML is not enough</h2>
+
+			<ul>
+				<li>Web Component <em>still</em> not ready</li>
+				<li>Templates are doomed</li>
+				<ul>
+					<li>Every time they are big</li>
+					<li>Depends on particular context</li>
+					<li><strike>Impossible</strike>Hard to compose</li>
+				</ul>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>JSON</h2>
+
+			<ul>
+				<li>Clear data structure</li>
+				<li>Composable and recursive</li>
+			</ul>
+
+			<pre>
+				<code>[{</code>
+				<code>    foo: <mark>[{ bar: { baz: 13 } }]</mark>,</code>
+				<code>    asd: "string"</code>
+				<code>}]</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Let's do it</h2>
+
+			<pre>
+				<code>names = [‘Ann’, ‘Liza’, ‘Scarlett’];</code>
+				<code class="next">root = document.createElement(‘ul’);</code>
+				<code class="next">items = names.map(<mark>nameView</mark>);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Composition</h2>
+
+			<pre>
+				<code>function nameView(name) {</code>
+				<code>    var <mark>element</mark> = document.createElement(‘li’);</code>
+				<code>    <mark>element</mark>.appendChild(document.createTextNode(name));</code>
+				<code>    return <mark>element</mark>;</code>
+				<code>}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Show it!</h2>
+
+			<pre>
+				<code>items.forEach(root.appendChild, root);</code>
+				<code>document.body.appendChild(root);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>No bueno</h2>
+
+			<ul>
+				<li>Imperative flow</li>
+				<li>Hard to write</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>First-class citizen</h2>
+
+			<p>An <mark>entity</mark> which supports all the operations generally available to other entities. These operations typically include being passed as a <mark>parameter</mark>, returned from a <mark>function</mark>, and assigned to a <mark>variable</mark>.</p>
+
+			<ul>
+				<li class="next">All data structures are FCC</li>
+				<li class="next">Functions in JS are FCC</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide shout link">
+		<div>
+			<h2>Can we describe UI<br>in the same way?</h2>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2><img src="pictures/react.svg" width="25%"><br><a href="http://facebook.github.io/react">React</a></h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Why?</h2>
+
+			<ul>
+				<li>UI is a function</li>
+				<li>Let's keep UI description declarative</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>React component</h2>
+
+			<pre>
+				<code>var Hello = React.<mark>createClass</mark>({</code>
+				<div class="next">
+					<code>    render() {</code>
+					<code>        return &lt;p&gt;Hello {<mark>this.props.name</mark>}&lt;/p&gt;;</code>
+					<code>    }</code>
+				</div>
+				<code>});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Usage</h2>
+
+			<pre>
+				<code>React = require("react");</code>
+				<code><mark class="important">Hello</mark> = require("hello.react");</code>
+				<code><mark>rootElement</mark> = document.querySelector("main");</code>
+				<code>&nbsp;</code>
+				<code>React.render(&lt;<mark class="important">Hello</mark> name="Ann" /&gt;, <mark>rootElement</mark>);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Composition</h2>
+
+			<pre>
+				<code>UserSection = React.createClass({</code>
+				<code>    render() {</code>
+				<code>        return (&lt;<mark>div</mark> onClick={someAction}&gt;</code>
+				<code>            &lt;<mark>Hello</mark> name={this.props.name} /&gt;</code>
+				<code>        &lt;/div&gt;</code>
+				<code>    }</code>
+				<code>});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>JSX ≠ HTML</h2>
+
+			<pre>
+				<code>var elem = &lt;div&gt;boo&lt;/div&gt;</code>
+				<code>var elem = React.createElement("div", null, "boo");</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Benefits</h2>
+
+			<ul>
+				<li>Immutable</li>
+				<li>Declarative</li>
+				<li>Easy to think about UI</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2><img src="pictures/flux.png"><br><a href="http://facebook.github.io/flux">Flux</a></h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Why?</h2>
+
+			<ul>
+				<li>React is only <strong>View</strong></li>
+				<li><strong>Separation of concerns</strong> in MVC is not so good</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Agenda</h2>
+
+			<ul>
+				<li>Let's talk about <strong>architecture</strong></li>
+				<li class="next">The things we're spending time on</li>
+				<li class="next">Forget about server</li>
+				<li class="next">Don't think about UI (almost)</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Everything you need to know about UI</h2>
+
+			<pre><code>render = (<mark>Data</mark>) => <mark>UI</mark>;</code></pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Developer's heaven</h2>
+
+			<pre>
+				<code>render = (Data) => UI;</code>
+				<code>update = (<mark>State</mark>, <mark>Action</mark>) => <mark>NewState</mark>;</code>
+			</pre>
+
+			<pre>
+				<code class="next">Actions = [Update This, Add That, Delete Shit, ...];</code>
+				<code class="next"><mark>AppState</mark> = Actions.<mark class="important">reduce</mark>(update, InitialState);</code>
+				<code class="next">AppState.subscribe(<mark>render</mark>);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide shout link">
+		<div>
+			<h2><a href="http://dces.essex.ac.uk/technical-reports/2004/csm-411.pdf">Amnon H Eden:<br>Abstraction Classes in Software Design</a></h2>
+		</div>
+	</section>
+
+	<section class="slide cover w">
+		<div>
+			<img src="pictures/abstraction-classes.png" class="cover">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Architecture & design</h2>
+			<ul>
+				<li>Architecture — set of strict rules (constraints)</li>
+				<li>Design — details of interfaces and different parts of system</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Flux</h2>
+
+			<ul>
+				<li><strong>Pattern</strong>, not a lib or framework</li>
+				<li class="next">Is not a MVC</li>
+				<li class="next">Based on <a href="http://martinfowler.com/eaaDev/EventSourcing.html">Event Sourcing</a> and <a href="http://martinfowler.com/bliki/CQRS.html">CQRS</a></li>
+				<li class="next">Separate domain logic, rendering and server requests in different layers</li>
+				<!-- мутации и асинхронную работу -->
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Flux will work for you if</h2>
+
+			<ul>
+				<li class="next">Your app has dynamic data</li>
+				<li class="next">Different views for one type of data</li>
+				<li class="next">Async actions</li>
+				<li class="next">Big project and support required</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Key ideas</h2>
+
+			<ul>
+				<li class="next">Unidirectional data flow</li>
+				<li class="next">Command-query responsibility segregation</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2><span class="flux-box flux-box-store flux-box-target">Store</span><span class="flux-box flux-box-view">View</span></h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Stores</h2>
+
+			<ul>
+				<li>Singleton</li>
+				<li class="next">Is not a model. It consists of one or more models</li>
+				<li class="next">State caching</li>
+				<li class="next">Has getters but not setters</li>
+				<li class="next">Can read another stores</li>
+				<li class="next">Actions are the only way to change state</li>
+				<li class="next">Knows only about Dispatcher</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2><span class="flux-box flux-box-dispatcher flux-box-target">Dispatcher</span><span class="flux-box flux-box-store">Store</span><span class="flux-box flux-box-view">View</span></h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Dispatcher</h2>
+
+			<ul>
+				<li>Central part of a system</li>
+				<li>Receive actions</li>
+				<li>Broadcast each action to all stores</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Dispatcher</h2>
+
+			<pre>
+				<code>Flux = require('<span class="flux-accent">flux</span>');</code>
+				<code>&nbsp;</code>
+				<code>Dispatcher = new Flux.Dispatcher();</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2><a href="https://facebook.github.io/flux/docs/dispatcher.html#content">Dispatcher API</a></h2>
+
+			<pre>
+				<code class="next">Dispatcher.<mark class="important">dispatch</mark>(<mark>action</mark>);</code>
+				<code class="next">Dispatcher.<mark class="important">register</mark>((<mark>action</mark>) => ...);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2><span class="flux-box flux-box-action flux-box-target">Action</span><span class="flux-box flux-box-dispatcher">Dispatcher</span><span class="flux-box flux-box-store">Store</span><span class="flux-box flux-box-view">View</span></h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Actions</h2>
+
+			<ul>
+				<li>Plain object</li>
+				<li class="next">Looks like news article</li>
+				<ul>
+					<li class="next">Header tells about what happened (fact)</li>
+					<li class="next">Body describes additional info about a fact</li>
+				</ul>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Action payload</h2>
+
+			<pre>
+				<code>{</code>
+				<code>    type: ActionTypes.<mark>DEPOSITED_INTO_ACCOUNT</mark></code>
+				<code>    data: {</code>
+				<code>        accountID: 13,</code>
+				<code>        amount: 500,</code>
+				<code>        timestamp: 1433482935845</code>
+				<code>    }</code>
+				<code>}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Action types</h2>
+
+			<p>Semantic is important</p>
+
+			<ul>
+				<li>Always in past tense</li>
+				<li>Passive form if it's possible</li>
+				<li class="next">Only in terms of domain logic</li>
+				<li class="next">Tells what happend, not a command</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Constants</h2>
+
+			<pre><code>const TODO_CREATED = 'TODO_CREATED';</code></pre>
+
+			<ul>
+				<li>Not required but recommended</li>
+				<li>Can help you avoid names conflicts</li>
+				<li>Good possibility to use static analysis</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Bad names</h2>
+
+			<pre>
+				<code>SHOW_LOAD_SPINNER</code>
+				<code>OPEN_MODAL</code>
+				<code>CREATE_TODO</code>
+				<code>LOAD_USERS</code>
+				<code>UPDATE_SOME_BULLSHIT</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Better names</h2>
+
+			<pre>
+				<code>TODO_CREATED</code>
+				<code>DEPOSITED_INTO_ACCOUNT</code>
+				<code>WITHDRAWAL_FAILED</code>
+				<code>TOKEN_RECEIVED</code>
+				<code>USER_INFO_UPDATED</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2><a href="https://github.com/STRML/keyMirror">Key Mirror</a></h2>
+
+			<pre>
+				<code>ActionTypes = keyMirror({</code>
+				<code>    <mark>TODO_CREATED</mark>: null,</code>
+				<code>    <mark>LIST_REQUESTED</mark>: null</code>
+				<code>});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Naive implementation</h2>
+
+			<pre>
+				<code>Dispatcher.register(function(action) {</code>
+				<code>    switch (action.type) {</code>
+				<code>    case <mark>TODO_ADDED</mark>:</code>
+				<code>        // mutations</code>
+				<code>        break;</code>
+				<code>    case <mark>TODO_REMOVED</mark>:</code>
+				<code>        // mutation</code>
+				<code>        break;</code>
+				<code>    }</code>
+				<code>});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Pure function</h2>
+
+			<pre>
+				<code>function CounterStore(<mark>state = 0</mark>, <mark>action</mark>) {</code>
+				<div class="next">
+					<code>    switch (action.type) {</code>
+					<code>    case DECREMENT:</code>
+					<code class="next">        return <mark>state – 1</mark>;</code>
+					<code>    case INCREMENT:</code>
+					<code class="next">        return <mark>state + 1</mark>;</code>
+					<code>    }</code>
+				</div>
+				<code>}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Smart organization</h2>
+
+			<pre>
+				<code>Store = {</code>
+				<code>    [ActionTypes.<mark>TODO_ADDED</mark>](state, action) {},</code>
+				<code>    [ActionTypes.<mark>TODO_REMOVED</mark>](state, action) {}</code>
+				<code>};</code>
+			</pre>
+
+			<p class="next"><a href="https://github.com/alexeyraspopov/flux-stateful">Flux Stateful</a> — good stores implementation</p>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Action Creators</h2>
+
+			<ul>
+				<li>Architecture layer where <strong>actions</strong> can be created</li>
+				<li class="next">Know about Dispatcher</li>
+				<li class="next">Know about external APIs</li>
+				<li class="next">Only one place where you can use async methods</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide cover w">
+		<div><img src="pictures/actors.png" class="cover"></div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Action Creators</h2>
+
+			<pre>
+				<code>var Dispatcher = require('AppDispatcher');</code>
+				<div class="next">
+					<code>&nbsp;</code>
+					<code>exports.<mark>addItemInCard</mark> = function(item){</code>
+				</div>
+				<code class="next">    Dispatcher.<mark class="important">dispatch</mark>({</code>
+				<code class="next">        type: <mark>ITEM_ADDED_IN_CARD</mark>,</code>
+				<div class="next">
+					<code>        data: item</code>
+					<code>    });</code>
+					<code>};</code>
+				</div>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>WebAPI</h2>
+
+			<ul>
+				<li>Isolated code (fully reusable)</li>
+				<li>Work with external environment (server, devices)</li>
+				<li>Only async API</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Async Action Creators</h2>
+
+			<pre>
+				<code>exports.<mark>requestUserInfo</mark> = function(user){</code>
+				<code class="next">  dispatch(<mark>USER_INFO_LOADING_STARTED</mark>, user);</code>
+				<code class="next">  WebAPI.loadUserInfo(user).<mark>then</mark>(</code>
+				<code class="next">    (info) => dispatch(<mark>USER_INFO_LOADED</mark>, info),</code>
+				<code class="next">    (error) => dispatch(<mark>USER_INFO_LOADING_FAILED</mark>, error)</code>
+				<div class="next">
+					<code>  );</code>
+					<code>};</code>
+				</div>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Benefits</h2>
+
+			<ul>
+				<li>Predictability</li>
+				<li class="next">Testability</li>
+				<li class="next">Single Source of Truth</li>
+				<li class="next">You can use whatever you want for UI</li>
+				<li class="next">Minimized effort to adding new functionality</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide shout link">
+		<div>
+			<h2><a href="https://github.com/nextminds/FluxRecorder">Flux Recorder</a></h2>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2><iframe width="960" height="540" src="https://www.youtube.com/embed/DtAbd305Oyk?rel=0&amp;controls=0" frameborder="0" allowfullscreen></iframe></h2>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div><h2>
+			<iframe width="960" height="540" src="https://www.youtube.com/embed/5yHFTN-_mOo?rel=0&amp;controls=0" frameborder="0" allowfullscreen></iframe>
+		</h2></div>
+	</section>
+
+	<section class="slide shout link">
+		<div>
+			<h2><a href="https://github.com/gilbox/vizone">Vizone DevTool</a></h2>
+		</div>
+	</section>
+
+	<section class="slide cover w">
+		<div><img src="pictures/vizone.png" class="cover"></div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Thank you!</h2>
+
+			<ul>
+				<li><a href="https://github.com/alexeyraspopov">github.com/alexeyraspopov</a></li>
+				<li><a href="https://twitter.com/alexeyraspopov">twitter.com/alexeyraspopov</a></li>
+			</ul>
+
+			<p>Link to this slides &mdash; <a href="http://alexeyraspopov.github.io/talks/better-ui">alexeyraspopov.github.io/talks/better-ui</a></p>
+		</div>
+	</section>
+
+	<p class="badge"><a href="https://github.com/shower/shower">Fork me on Github</a></p>
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<div class="progress"><div></div></div>
+	<script src="node_modules/shower-core/shower.min.js"></script>
+	<!-- Copyright © 2013 Yours Truly, Famous Inc. -->
+</body>
+</html>
