@@ -259,7 +259,7 @@
 
 			<pre>
 				<code>{</code>
-				<code>    <mark>type</mark>: <mark class="important">ITEM_ADDED_IN_CARD</mark></code>
+				<code>    <mark>type</mark>: <mark class="important">ITEM_ADDED_IN_CARD</mark>,</code>
 				<code>    <mark>data</mark>: {</code>
 				<code>        id: "03df5ac",</code>
 				<code>        name: "The Shawshank Redemption"</code>
@@ -351,7 +351,7 @@
 			<pre>
 				<code>Store(Dispatcher, {</code>
 				<code>    getInitialState() { return <mark>{ ... }</mark>; },</code>
-				<code>    [ITEM_ADDED](state, action) { return <mark>newState</mark>; }</code>
+				<code>    [ITEM_ADDED](state, action) { return <mark>newState</mark>; },</code>
 				<code>    [ITEM_REMOVED](state, action) { return <mark>newState</mark>; }</code>
 				<code>});</code>
 			</pre>
