@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>What the Flux</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="node_modules/shower-ribbon/styles/screen.css">
+	<style type="text/css">
+		.flux-accent{
+			color: #318435;
+		}
+		.shout.link h2{
+			font-size: 100px;
+			line-height: 1.5;
+		}
+		.slide.shout h2{
+			font-weight: normal;
+		}
+		.zipped{
+			font-size: 50%;
+		}
+		pre.zipped code::before{
+			margin-left: -25px;
+		}
+		.key{
+			font-size: 200%;
+		}
+		pre.key code::before{
+			margin-left: -95px;
+		}
+	</style>
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>What the Flux</h1>
+		<p><a href="http://alexeyraspopov.github.io">Alexey Raspopov</a>, <a href="http://datarobot.com">DataRobot</a>.</p>
+	</header>
+
+	<section class="slide shout">
+		<div>
+			<h2>What the <span class="flux-accent">Flux</span></h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2><code>$ whoami</code></h2>
+
+			<ul>
+				<li>Alexey Raspopov</li>
+				<li>Front End developer in <a href="http://datarobot.com">DataRobot</a></li>
+				<li>4+ years in production</li>
+				<li>Functional Programming is my religion</li>
+				<li>Love movies, music, design and my PlayStation</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide cover w">
+		<div><img src="pictures/kyiv.jpg" class="cover"></div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2><a href="http://facebook.github.io/react">React</a></h2>
+
+			<ul>
+				<li>View layer only</li>
+				<li>Declarative instead of imperative</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>In nutshell</h2>
+
+			<pre class="key">
+				<code>react(<mark>data</mark>) &rarr; <mark>UI</mark>;</code>
+				<code class="next">template(data) &rarr; UI;</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide shout link">
+		<div>
+			<h2><a href="http://dces.essex.ac.uk/technical-reports/2004/csm-411.pdf">Amnon H Eden:<br>Abstraction Classes in Software Design</a></h2>
+		</div>
+	</section>
+
+	<section class="slide cover w">
+		<div>
+			<img src="pictures/abstraction-classes.png" class="cover">
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>What is Flux?</h2>
+
+			<ul>
+				<li class="next"><strong>Pattern</strong>, not a framework</li>
+				<li class="next">Not a MVC</li>
+				<li class="next">Compilation of ideas from <a href="http://martinfowler.com/eaaDev/EventSourcing.html">Event Sourcing</a> and <a href="http://martinfowler.com/bliki/CQRS.html">CQRS</a></li>
+				<li class="next">Separates domain logic, rendering and asynchronous operations</li>
+				<li class="next">Unidirectional data flow</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Why?</h2>
+
+			<ul>
+				<li><strong>Declarative</strong> instead of imperative</li>
+				<li>Mental models matter</li>
+				<li>Clear set of restrictments is good for you</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Flux will work for you if</h2>
+
+			<ul>
+				<li class="next">Your app has dynamic data</li>
+				<li class="next">Different views for one type of data</li>
+				<li class="next">Async actions</li>
+				<li class="next">Support required</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Structure</h2>
+
+			<pre class="zipped">
+				<code>/actions</code>
+				<code>    /__tests__</code>
+				<code>    <mark>UserActions</mark>.js</code>
+				<code>/api</code>
+				<code>    /__tests__</code>
+				<code>    <mark>ExternalWebAPI</mark>.js</code>
+				<code>/components</code>
+				<code>    /__tests__</code>
+				<code>    <mark>UserPage</mark>.js</code>
+				<code>/stores</code>
+				<code>    /__tests__</code>
+				<code>    <mark>UserStore</mark>.js</code>
+				<code><mark>AppDispatcher</mark>.js</code>
+				<code><mark>Constants</mark>.js</code>
+				<code>index.js</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide shout link">
+		<div>
+			<h2>
+				<a href="https://github.com/alexeyraspopov/flux-structure-example">alexeyraspopov/<br>flux-structure-example</a>
+			</h2>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Stores</h2>
+
+			<ul>
+				<li>Singleton</li>
+				<li>The only one place for state mutations</li>
+				<li>Accumulate state</li>
+				<li>React on Dispatcher</li>
+				<li>Have only getters</li>
+				<li>Sync only</li>
+				<li>Domain data only</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>From stores to views</h2>
+
+			<pre>
+				<code>ConcreteStore.<mark>subscribe</mark>(function() {</code>
+				<code>    <mark>render</mark>(ConcreteStore.<mark>getState</mark>());</code>
+				<code>});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Dispatcher</h2>
+
+			<ul>
+				<li>Central part of data flow</li>
+				<li>Broadcast data to all stores</li>
+				<li>The only part of Flux that has concrete implementation</li> <!-- rethink -->
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Dispatcher: API</h2>
+
+			<pre>
+				<code>var Flux = require(<mark>"flux"</mark>);</code>
+				<code>var Dispatcher = new Flux.Dispatcher();</code>
+			</pre>
+
+			<pre class="next">
+				<code>Dispatcher.<mark class="important">dispatch</mark>(<mark>action</mark>);</code>
+				<code>Dispatcher.<mark class="important">register</mark>(<mark>action => ...</mark>);</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Actions</h2>
+
+			<ul>
+				<li>Plain old JavaScript <strong>objects</strong></li>
+				<li class="next">Tell what happened in your system</li>
+				<li class="next">Look like news article</li>
+				<ul class="next">
+					<li>Header tells about what happened (fact)</li>
+					<li>Body describes additional info about a fact</li>
+				</ul>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Actions: Example</h2>
+
+			<pre>
+				<code>{</code>
+				<code>    <mark>type</mark>: <mark class="important">ITEM_ADDED_IN_CARD</mark></code>
+				<code>    <mark>data</mark>: {</code>
+				<code>        id: "03df5ac",</code>
+				<code>        name: "The Shawshank Redemption"</code>
+				<code>        ...</code>
+				<code>    }</code>
+				<code>}</code>
+			</pre>
+
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Types</h2>
+
+			<pre><code>const ITEM_ADDED_IN_CARD = "ITEM_ADDED_IN_CARD";</code></pre>
+
+			<ul>
+				<li class="next">Constants not required, but recommended</li>
+				<li class="next">Identifiers</li>
+				<li class="next">Semantic matters</li>
+				<ul>
+					<li class="next">Past tense</li>
+					<li class="next">Only in domain-related names</li>
+					<li class="next">Passive voice if possible</li>
+					<li class="next">Tells what happened, not a command</li>
+				</ul>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Bad names</h2>
+
+			<pre>
+				<code>SHOW_LOAD_SPINNER</code>
+				<code>OPEN_MODAL</code>
+				<code>CREATE_TODO</code>
+				<code>LOAD_USERS</code>
+				<code>UPDATE_SOME_BULLSHIT</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Better names</h2>
+
+			<pre>
+				<code>TODO_CREATED</code>
+				<code>DEPOSITED_INTO_ACCOUNT</code>
+				<code>WITHDRAWAL_FAILED</code>
+				<code>TOKEN_RECEIVED</code>
+				<code>USER_INFO_UPDATED</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2><a href="https://github.com/STRML/keyMirror">Key Mirror</a></h2>
+
+			<pre>
+				<code>var <mark class="important">ActionTypes</mark> = keyMirror({</code>
+				<code>    <mark>TODO_CREATED</mark>: null,</code>
+				<code>    <mark>LIST_REQUESTED</mark>: null</code>
+				<code>});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Stores: Implementations</h2>
+
+			<ul>
+				<li><a href="https://github.com/jashkenas/backbone">Backbone Models</a></li>
+				<li><a href="https://github.com/yomguithereal/baobab">Baobab</a></li>
+				<li><a href="https://github.com/alexeyraspopov/flux-stateful">Flux Stateful</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Stores: Implementation</h2>
+
+			<pre>
+				<code>Store(Dispatcher, {</code>
+				<code>    getInitialState() { return <mark>{ ... }</mark>; },</code>
+				<code>    [ITEM_ADDED](state, action) { return <mark>newState</mark>; }</code>
+				<code>    [ITEM_REMOVED](state, action) { return <mark>newState</mark>; }</code>
+				<code>});</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Action Creators</h2>
+
+			<ul>
+				<li>Just functions</li>
+				<li>Can dispatch more than one action</li>
+				<li>Can be both async and sync</li>
+				<li>Know about Web API and Dispatcher</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Action Creators: Example</h2>
+
+			<pre>
+				<code>export function <mark>addItemInCard</mark>(item) {</code>
+				<code>    Dispatcher.dispatch({</code>
+				<code>        type: <mark>ITEM_ADDED_IN_CARD</mark></code>
+				<code>        data: item</code>
+				<code>    });</code>
+				<code>}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Web API</h2>
+
+			<ul>
+				<li>Isolated layer</li>
+				<li>Fully reusable</li>
+				<li>Interacts with world</li>
+				<ul>
+					<li>Server requests</li>
+					<li>Devices and env-related API</li>
+				</ul>
+				<li>Can be both <strong>async</strong> and <strong>sync</strong></li>
+				<ul>
+					<li>Async API is recommended (callbacks, observables, promises)</li>
+				</ul>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Web API: Example</h2>
+
+			<pre>
+				<code><mark class="important">export function projects</mark>(token, projectId) {</code>
+				<code>    return <mark>fetch</mark>("/projects/"" + projectId, {</code>
+				<code>        headers: {</code>
+				<code>            Authorization: "Token " + token</code>
+				<code>        }</code>
+				<code>    });</code>
+				<code>}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Web API: Usage</h2>
+
+			<pre>
+				<code>function loadProjects(token, id) {</code>
+				<code>    return WebAPI.projects(token, id).then(</code>
+				<code>        data => dispatch({ type: PROJECTS_LOADED, data }),</code>
+				<code>        error => dispatch({ type: PROJECTS_LOAD_FAILED, error })</code>
+				<code>    );</code>
+				<code>}</code>
+			</pre>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Benefits</h2>
+
+			<ul>
+				<li>Predictability</li>
+				<li class="next">Testability</li>
+				<li class="next">Loose coupling</li>
+				<li class="next">Single Source of Truth</li>
+				<li class="next">You can use whatever you want for UI (React, templates, etc)</li>
+				<li class="next">Minimized effort to adding new functionality</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide shout link">
+		<div>
+			<h2><a href="https://github.com/nextminds/FluxRecorder">Flux Recorder</a></h2>
+		</div>
+	</section>
+
+	<section class="slide shout">
+		<div>
+			<h2><iframe width="960" height="540" src="https://www.youtube.com/embed/DtAbd305Oyk?rel=0&amp;controls=0" frameborder="0" allowfullscreen></iframe></h2>
+		</div>
+	</section>
+
+	<section class="slide shout link">
+		<div>
+			<h2><a href="https://github.com/gilbox/vizone">Vizone DevTool</a></h2>
+		</div>
+	</section>
+
+	<section class="slide cover w">
+		<div><img src="pictures/vizone.png" class="cover"></div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Useful links</h2>
+
+			<ul>
+				<li><a href="https://github.com/facebook/flux">github.com/facebook/flux</a></li>
+				<li><a href="https://github.com/alexeyraspopov/flux-stateful">github.com/alexeyraspopov/flux-stateful</a></li>
+				<li><a href="https://github.com/voronianski/flux-comparison">github.com/voronianski/flux-comparison</a></li>
+				<li><a href="https://medium.com/@goatslacker/principles-of-flux-ea872bc20772">Josh Perez: Principles of Flux</a></li>
+				<li><a href="https://medium.com/@dan_abramov/the-case-for-flux-379b7d1982c6">Dan Abramov: The Case for Flux</a></li>
+				<li><a href="https://medium.com/@cassiozen/flux-cargo-culting-3cae9ff27c0c">Cássio Zen: Flux Cargo-Culting</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Thank you!</h2>
+
+			<ul>
+				<li><a href="https://twitter.com/alexeyraspopov">twitter.com/alexeyraspopov</a></li>
+				<li><a href="https://github.com/alexeyraspopov">github.com/alexeyraspopov</a></li>
+			</ul>
+
+			<p>These slides &mdash; <a href="http://goo.gl/10469q">goo.gl/10469q</a></p>
+		</div>
+	</section>
+
+	<p class="badge"><a href="https://github.com/shower/shower">Powered by Shower</a></p>
+	<div class="progress"><div></div></div>
+	<script src="node_modules/shower-core/shower.min.js"></script>
+</body>
+</html>
