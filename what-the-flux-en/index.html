@@ -429,8 +429,8 @@
 			<pre>
 				<code>function loadProjects(token, id) {</code>
 				<code>  return WebAPI.projects(token, id).then(</code>
-				<code>    data => dispatch({ type: PROJECTS_LOADED, data }),</code>
-				<code>    error => dispatch({ type: PROJECTS_LOAD_FAILED, error })</code>
+				<code>    data => dispatch({ type: <mark>PROJECTS_LOADED</mark>, <mark class="important">data</mark> }),</code>
+				<code>    error => dispatch({ type: <mark>PROJECTS_LOAD_FAILED</mark>, <mark class="important">error</mark> })</code>
 				<code>  );</code>
 				<code>}</code>
 			</pre>
