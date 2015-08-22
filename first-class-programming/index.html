@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>First class programming</title>
+	<title>Declarative Programming</title>
 	<link href='http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="node_modules/shower-ribbon/styles/screen-16x10.css">
 	<style>
@@ -62,28 +62,8 @@
 
 </head>
 <body class="shower list">
-
-	<!-- идемпотентность, симметрия, ассоциативность, денотационная семантика -->
-
-	<!-- неуспех как first-class citizen -->
-
-	<!--
-	state + action = state'
-	state' + action = state''
-	(state + action) + action = state''
-	state + action + ... + action = state"
-
-	-- закон
-	f(state, action) = state
-	actions = {action', action'', ...};
-	-- алгебраическая прогрессия, чтобы получить стейт для N позиции
-	-- нужно сложить его со всеми предыдущими
-
-	-- first-class citizen это то, что вы можете представить
-	-- в материальном виде, атомарно, а не как последовательность действий
-	-->
 	<header class="caption">
-		<h1>First class programming</h1>
+		<h1>Declarative Programming</h1>
 		<p><a href="http://alexeyraspopov.github.io">Alexey Raspopov</a>, <a href="http://datarobot.com">DataRobot</a>.</p>
 	</header>
 
@@ -161,12 +141,12 @@
 			<li class="next">Часто не консистентные термины</li>
 			<li class="next">Слишком много свободы</li>
 			<li class="next">Привет, инкрементальный <span class="secondary-accent">дебаг</span></li>
-			<!-- накрылось красной маздой -->
 		</ul>
 	</section>
 
 	<section class="slide cover"><img src="pictures/debug-atkinson.gif" class="cover w"></section>
 
+	<!-- накрылось красной маздой -->
 	<section class="slide cover"><img src="pictures/wtf.jpg" class="cover w"></section>
 
 	<section class="slide">
@@ -199,13 +179,129 @@
 	</section>
 
 	<section class="slide">
+		<h2>Денотационная семантика</h2>
+
+		<ul>
+			<li><strong class="primary-accent">Программа</strong> &mdash; это функция, преобразующая входные <span class="primary-accent">данные</span> в выходные</li>
+			<li>Математика веками оттачивала такой способ «исполнения программ», называя его «<span class="secondary-accent">применением функций</span>»</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Циклы? А нужно ли?</h2>
+
+		<ul>
+			<li>Какова конечная <span class="primary-accent">цель</span> использования цикла?</li>
+			<li>Можем ли мы получить <span class="secondary-accent">результат</span> прямо сейчас?</li>
+		</ul>
+
+		<p><a href="http://www.cl.cam.ac.uk/~gw104/dens.pdf">Glynn Winskel: Lecture Notes on Denotational Semantics</a></p>
+	</section>
+
+	<section class="slide">
+		<h2>Рекурсия!</h2>
+
+		<ul>
+			<li>Представление <span class="primary-accent">результата</span>, а не последовательности <span class="secondary-accent">действий</span></li>
+			<li class="next">Требует понимания термина <strong class="primary-accent">рекурсия</strong></li>
+		</ul>
+	</section>
+
+	<section class="slide">
 		<h2 class="shout">Why? <br>For the <span class="primary-accent">Glory</span> <br>of <span class="secondary-accent">Satan</span>, of course!</h2>
 	</section>
 
 	<section class="slide">
 		<h2>First-class citizens</h2>
 
-		<p><span class="primary-accent">Сущность</span>, которая может быть передана как параметр, возвращена как <span class="secondary-accent">результат функции</span> или присвоена <span class="secondary-accent">переменной</span>.</p>
+		<p><strong class="primary-accent">Сущность</strong>, которая может быть передана как параметр, возвращена как <strong class="secondary-accent">результат функции</strong> или присвоена <strong class="secondary-accent">переменной</strong>.</p>
+
+		<p class="next">Это то, что вы можете представить в <span class="primary-accent">материальном виде</span>, атомарно, а не как последовательность <span class="secondary-accent">действий</span>.</p>
+	</section>
+
+	<section class="slide">
+		<h2>Присвоение переменной</h2>
+
+		<pre>
+			<code>var <strong class="primary-accent">result</strong> = function() {</code>
+			<code>  return <strong class="secondary-accent">13</strong>;</code>
+			<code>};</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Передача как параметра</h2>
+
+		<pre>
+			<code><span class="primary-accent">[1, 2, 3]</span>.<mark>map</mark>(function(number) {</code>
+			<code>  return <strong class="secondary-accent">number * 2</strong>;</code>
+			<code>});</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Функция как результат</h2>
+
+		<pre>
+			<code>function <mark>counter</mark>(start) {</code>
+			<code>  return <strong class="primary-accent">function()</strong> {</code>
+			<code>    return <strong class="secondary-accent">start++</strong>;</code>
+			<code>  };</code>
+			<code>}</code>
+		</pre>
+	</section>
+
+	<section class="slide install">
+		<h2 class="shout"><code>1 + (2 + (3 + <strong class="primary-accent">x</strong>))</code></h2>
+	</section>
+
+	<section class="slide install">
+		<h2 class="shout"><code>state</code></h2>
+	</section>
+
+	<section class="slide install">
+		<h2 class="shout"><code>action <span class="primary-accent">&#8658;</span> state</code></h2>
+	</section>
+
+	<section class="slide install">
+		<h2 class="shout"><code>newState(<strong class="primary-accent">action</strong>, <strong class="secondary-accent">state</strong>)</code></h2>
+	</section>
+
+	<section class="slide install">
+		<h2 class="shout"><code>(action <span class="primary-accent">&#8658;</span> state)</code></h2>
+	</section>
+
+	<section class="slide install">
+		<h2 class="shout"><code>action &#8658; (action <span class="primary-accent">&#8658;</span> state)</code></h2>
+	</section>
+
+	<section class="slide install">
+		<h2 class="shout"><code>...</code></h2>
+	</section>
+
+	<section class="slide install">
+		<h2 class="shout"><code>ƒ(<strong class="primary-accent">action</strong>, <strong class="secondary-accent">state</strong>) = <strong class="secondary-accent">state</strong></code></h2>
+	</section>
+
+	<section class="slide install">
+		<h2 class="shout"><code>Actions.<mark>reduce</mark>(<strong class="primary-accent">...</strong>);</code></h2>
+	</section>
+
+	<section class="slide">
+		<div>
+			<h2>Всё вместе</h2>
+
+			<pre>
+				<code>render = (Data) => UI;</code>
+				<code class="next">update = (<strong class="secondary-accent">State</strong>, <strong class="primary-accent">Action</strong>) => <strong class="secondary-accent">NewState</strong>;</code>
+			</pre>
+
+			<pre>
+				<code class="next">Actions = [<strong class="primary-accent">Update</strong> This, <strong class="primary-accent">Add</strong> That, <strong class="primary-accent">Delete</strong> Shit, ...];</code>
+				<code class="next"><mark>AppState</mark> = Actions.<mark class="important">reduce</mark>(update, InitialState);</code>
+				<code class="next">AppState.subscribe(<mark>render</mark>);</code>
+			</pre>
+		</div>
 	</section>
 
 	<section class="slide">
@@ -219,7 +315,7 @@
 		<ul>
 			<li>Не так страшны как их рисуют</li>
 			<li>Очень эффективны если правильно применять</li>
-			<li>Необходимо пройти <em>путь</em></li>
+			<li>Необходимо пройти <em class="primary-accent">путь монаха</em></li>
 		</ul>
 	</section>
 
@@ -234,6 +330,19 @@
 	</section>
 
 	<section class="slide"><img src="pictures/holy.jpg" class="place top"></section>
+
+	<section class="slide">
+		<h2>Монады</h2>
+
+		<ul>
+			<li>Структура данных</li>
+			<li>Сокрытие <strong class="primary-accent">побочных эффектов</strong></li>
+			<li>Цепочка <span class="primary-accent">композиции</span> функций</li>
+			<li>Гибкое управление <span class="secondary-accent">поведением</span></li>
+		</ul>
+
+		<p><a href="http://fsharpforfunandprofit.com/posts/recipe-part2/">Railway Oriented Programming</a></p>
+	</section>
 
 	<section class="slide">
 		<h2 class="shout"><a href="https://github.com/alexeyraspopov/dgelong">Dgelong</a></h2>
@@ -252,6 +361,7 @@
 			<li>Потому что я <em>не хочу</em> подключать комбайн с вайфаем если мне нужно написать всего одну строчку кода</li>
 			<li class="next">Мне не нужна докторская степень в математике чтобы вывести “Hello World” на экран</li>
 			<li class="next"><span class="primary-accent">API</span> должен быть близким к нативному</li>
+			<li class="next"><span class="secondary-accent">Документация</span> не должна издаваться в двух томах</li>
 			<li class="next">Имплементация библиотеки не должна гадить в стектрейс</li>
 			<li class="next">For <span class="secondary-accent">fun</span> and profit</li>
 		</ol>
@@ -268,9 +378,9 @@
 			<code>  return <strong class="secondary-accent">Failure</strong>("Steve Wozniak isn't boring");</code>
 			<code>}</code>
 		</pre>
-	</section>
 
-	<section class="slide cover"><img src="pictures/thanks.jpg" class="cover w"></section>
+		<p class="note"><strong>Неуспех</strong> как first-class citizen</p>
+	</section>
 
 	<section class="slide">
 		<h2><del>Криминальное</del> Чтиво</h2>
@@ -278,6 +388,7 @@
 		<ul>
 			<li><a href="http://www.usingcsp.com/cspbook.pdf">C. A. R. Hoare: Communicating Sequential Processes</a></li>
 			<li><a href="http://www.cl.cam.ac.uk/~gw104/dens.pdf">Glynn Winskel: Lecture Notes on Denotational Semantics</a></li>
+			<li><a href="http://fsharpforfunandprofit.com/posts/recipe-part2/">Railway Oriented Programming</a></li>
 		</ul>
 
 		<ul>
@@ -285,6 +396,8 @@
 			<li><a href="https://github.com/kriskowal/gtor">kriskowal/gtor</a></li>
 		</ul>
 	</section>
+
+	<section class="slide cover"><img src="pictures/thanks.jpg" class="cover w"></section>
 
 	<section class="slide">
 		<h2>Спасибо!</h2>
@@ -297,7 +410,7 @@
 
 	<div class="progress"></div>
 	<footer class="badge">
-		<a href="https://github.com/shower/shower">Fork me on Github</a>
+		<a href="https://github.com/shower/shower">Powered by Shower</a>
 	</footer>
 	<script src="node_modules/shower-core/shower.min.js"></script>
 </body>
