@@ -345,6 +345,31 @@
 	</section>
 
 	<section class="slide">
+		<h2 class="shout"><span class="primary-accent">fetch</span> vs XMLHttp<span class="secondary-accent">Request</span></h2>
+	</section>
+
+	<section class="slide">
+		<h2>Promise</h2>
+
+		<p>Асинхронная <strong class="primary-accent">работа</strong> как <span class="secondary-accent">first-class</span> citizen</p>
+
+		<pre>
+			<code class="next">var <strong class="primary-accent">users</strong> = <mark>fetch</mark>("/users");</code>
+			<code class="next">var updatedUsers = <strong class="primary-accent">users</strong>.then(<strong class="secondary-accent">fn</strong>);</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Observable</h2>
+
+		<pre>
+			<code>var <strong class="primary-accent">clicks</strong> = Observable.fromEvent(element, <mark>"click"</mark>);</code>
+			<code class="next">var coords = <strong class="primary-accent">clicks</strong>.<mark>map</mark>(event => event.<strong class="secondary-accent">pageX</strong>);</code>
+			<code class="next">coords.forEach(x => console.log(<strong class="secondary-accent">x</strong>));</code>
+		</pre>
+	</section>
+
+	<section class="slide">
 		<h2 class="shout"><a href="https://github.com/alexeyraspopov/dgelong">Dgelong</a></h2>
 	</section>
 
@@ -383,6 +408,20 @@
 	</section>
 
 	<section class="slide">
+		<h2>Реальный пример</h2>
+
+		<pre>
+			<code>return <strong class="primary-accent">Maybe</strong>(prediction)</code>
+			<code>  .bind(predictionValue)</code>
+			<code>  .bind(fixedResult)</code>
+			<code>  .bind(formattedResult)</code>
+			<code>  .<span class="secondary-accent">lift</span>(PredictionResult, Spinner);</code>
+		</pre>
+
+		<p class="note">Никакой вложенной композиции, полная независимость функций.</p>
+	</section>
+
+	<section class="slide">
 		<h2><del>Криминальное</del> Чтиво</h2>
 
 		<ul>
@@ -406,6 +445,8 @@
 			<li><a href="https://github.com/alexeyraspopov">github.com/alexeyraspopov</a></li>
 			<li><a href="https://twitter.com/alexeyraspopov">twitter.com/alexeyraspopov</a></li>
 		</ul>
+
+		<p>Ссылка на слайды &mdash; <a href="https://alexeyraspopov.github.io/talks/first-class-programming">alexeyraspopov.github.io/talks/first-class-programming</a></p>
 	</section>
 
 	<div class="progress"></div>
