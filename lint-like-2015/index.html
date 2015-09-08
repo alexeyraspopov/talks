@@ -56,6 +56,21 @@
 		.secondary-accent{
 			color: #ff4081;
 		}
+
+		.slide pre .diff-added{
+			color: green;
+		}
+		.slide pre .diff-removed{
+			color: red;
+		}
+		.slide pre .diff-added::before{
+			content: '  + ';
+			color: inherit;
+		}
+		.slide pre .diff-removed::before{
+			content: '  - ';
+			color: inherit;
+		}
 	</style>
 
 </head>
@@ -133,6 +148,7 @@
 			<li>Widely popular in Front End <span class="primary-accent">community</span></li>
 			<li>Easy to start with for <span class="secondary-accent">new team members</span></li>
 			<li>Based on experience of hundreds developers</li>
+			<li>2 spaces, single quotes, etc...</li>
 		</ul>
 	</section>
 
@@ -152,13 +168,102 @@
 		<h2 class="shout"><span class="primary-accent">Highlights</span></h2>
 	</section>
 
-	<!-- trailing comma -->
+	<section class="slide">
+		<h2>Trailing comma: <span class="primary-accent">always</span></h2>
+
+		<pre>
+			<code><mark class="comment">// valid JS code</mark></code>
+			<code>const hero = {</code>
+			<code>    firstName: 'Florence',</code>
+			<code>    lastName: 'Nightingale'<mark class="important">,</mark></code>
+			<code>};</code>
+		</pre>
+	</section>
+
 	<section class="slide"><img src="pictures/holy.jpg" class="place top"></section>
 
-	<!-- let, const -->
+	<section class="slide">
+		<h2>Better git diffs</h2>
+
+		<pre>
+			<code><mark class="comment">// bad</mark></code>
+			<code>const hero = {</code>
+			<code>    firstName: 'Florence',</code>
+			<code class="diff-removed">    lastName: 'Nightingale'</code>
+			<code class="diff-added">    lastName: 'Nightingale',</code>
+			<code class="diff-added">    inventorOf: ['coxcomb chart']</code>
+			<code>};</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Better git diffs</h2>
+
+		<pre>
+			<code><mark class="comment">// good</mark></code>
+			<code>const hero = {</code>
+			<code>    firstName: 'Florence',</code>
+			<code>    lastName: 'Nightingale',</code>
+			<code class="diff-added">    inventorOf: ['coxcomb chart'],</code>
+			<code>};</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2 class="shout"><span class="primary-accent">let</span> & <span class="primary-accent">const</span><br>instead of <span class="secondary-accent">var</span></h2>
+	</section>
+
 	<section class="slide cover"><img src="pictures/omg.jpg" class="cover w"></section>
 
-	<!-- one-var -->
+	<section class="slide">
+		<h2><span class="primary-accent">let</span> & <span class="primary-accent">const</span> instead of <span class="secondary-accent">var</span></h2>
+
+		<ul>
+			<li><code>var</code> hoists, <code>let</code> and <code>const</code> don't</li>
+			<li>Readability: you always see where you have mutable or immutable variables</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2><span class="primary-accent">let</span> & <span class="primary-accent">const</span></h2>
+
+		<pre>
+			<code>if (condition) {</code>
+			<code>    <span class="primary-accent">let</span> <mark>name</mark> = 'Ann';</code>
+			<code>    <span class="primary-accent">const</span> users = [];</code>
+			<code>    ...</code>
+			<code>}</code>
+			<code>alert(<mark>name</mark>); <mark class="comment">// name is not defined</mark></code>
+			<code>alert(<mark>users</mark>); <mark class="comment">// users is not defined</mark></code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>One var/let/const per line</h2>
+
+		<pre>
+			<code><mark class="comment">// bad</mark></code>
+			<code><span class="primary-accent">var</span> type = 'Binary',</code>
+			<code>    data = [ ... ];</code>
+		</pre>
+
+		<pre>
+			<code><mark class="comment">// good</mark></code>
+			<code><span class="primary-accent">var</span> type = 'Binary';</code>
+			<code><span class="primary-accent">var</span> data = [ ... ];</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>One var/let/const per line</h2>
+
+		<pre>
+			<code><mark class="comment">// good</mark></code>
+			<code><span class="primary-accent">const</span> RADIUS = 13;</code>
+			<code><span class="primary-accent">const</span> someInterestingNumber = 3.14;</code>
+			<code><span class="primary-accent">let</span> pointer = 0;</code>
+		</pre>
+	</section>
 
 	<section class="slide"><img src="pictures/eslint-pr.png" class="screenshot place"></section>
 
