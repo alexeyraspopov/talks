@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en-us">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Declarative Programming</title>
+	<title>Lint Like it's 2015</title>
 	<link href='http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="node_modules/shower-ribbon/styles/screen-16x10.css">
 	<style>
@@ -16,11 +16,18 @@
 		.slide h2{
 			color: rgba(0, 0, 0, 0.87);
 		}
-		.slide.install h2{
+		.slide h2.shout small{
+			font-size: 24px;
+			display: block;
+			line-height: 3.2;
+			font-style: italic;
+			font-weight: normal;
+		}
+		.slide h2.snippet{
 			padding-left: 0;
 			text-align: center;
 		}
-		.slide.install h2 code{
+		.slide h2.snippet code{
 			font-size: 68px;
 			background: none;
 		}
@@ -39,17 +46,8 @@
 			padding-left: 100px;
 		}
 
-		.shout.lambda{
-			padding-left: 0;
-			font-size: 20em;
-			text-align: center;
-		}
-
-		.slide.black h2{
-			color: red;
-		}
-		.slide.black{
-			color: white;
+		.screenshot{
+			max-width: 80%;
 		}
 
 		.primary-accent{
@@ -63,391 +61,123 @@
 </head>
 <body class="shower list">
 	<header class="caption">
-		<h1>Declarative Programming</h1>
+		<h1>Lint Like it's 2015</h1>
 		<p><a href="http://alexeyraspopov.github.io">Alexey Raspopov</a>, <a href="http://datarobot.com">DataRobot</a>.</p>
 	</header>
 
-	<section class="slide"><img src="pictures/Odesa_JS_logo_big.jpg" class="place"></section>
+	<section class="slide">
+		<h2 class="shout"><span class="primary-accent">Lint</span> JavaScript <br>like it's <span class="secondary-accent">2015</span></h2>
+	</section>
 
 	<section class="slide">
-		<h2>Кто я?</h2>
+		<h2>Currect state</h2>
 
 		<ul>
-			<li>4+ года расстановки <code>ng-if</code> и <code>.clearfix</code></li>
-			<li>Люблю <a href="https://github.com/alexeyraspopov">Open Source</a></li>
-			<li>Functional Programming Monk</li>
-			<li>Front End Engineer в <a href="http://datarobot.com">DataRobot</a></li>
+			<li>JSHint v2.4.4</li>
+			<li>Poor <span class="primary-accent">ES6</span> support</li>
+			<li>Poor set of rules</li>
+			<li>Inability to write own rules (also, proposed <a href="https://github.com/jshint/jshint-next/wiki/Design">API</a> is awful)</li>
 		</ul>
 	</section>
 
-	<section class="slide cover"><img src="pictures/datarobot.jpg" class="cover w"></section>
-
-	<section class="slide">
-		<h2 class="shout"><span class="primary-accent">Declarative</span> Programming & <br>First-class Structures</h2>
-	</section>
-
-	<section class="slide cover"><img src="pictures/party.jpg" class="cover w"></section>
-	<section class="slide cover"><img src="pictures/morning-after.jpg" class="cover w"></section>
-
-	<section class="slide">
-		<h2 class="shout">Привет, <span class="secondary-accent">Одесса</span>!</h2>
-	</section>
-
-	<section class="slide"><img src="pictures/taxi.png" class="place" style="max-width: 70%"></section>
-	<section class="slide cover"><img src="pictures/angry.jpg" class="cover w"></section>
-
-	<section class="slide">
-		<h2>О чем это я?</h2>
-
-		<ul>
-			<li>Объекты первого класса</li>
-			<li><span class="secondary-accent">Говнокод</span></li>
-			<li>Важность наличия принципов и следования им</li>
-			<li><strong class="primary-accent">Монады</strong> для лучшей композиции</li>
-		</ul>
-	</section>
-
-	<section class="slide cover"><img src="pictures/asleep.jpg" class="cover w"></section>
-
-	<section class="slide black">
-		<h2>Disclaimer</h2>
-
-		<p>Не буду рассказывать о React.</p>
-
-		<p class="next">Извините :(</p>
-
-		<p class="next">Будет <del>страшный</del> код.</p>
-	</section>
-
-	<section class="slide cover"><img src="pictures/walkthrough.jpg" class="cover w"></section>
-
-	<section class="slide">
-		<h2>Imperative Programming</h2>
-
-		<ul>
-			<li>Последовательность шагов к достижению определенной цели</li>
-			<li>Описание процесса изменения состояния</li>
-		</ul>
-
-		<p class="note">Вы уверены что ваше представление о процессе совпадает с представлением других разработчиков в команде?</p>
-		<!-- описание работы как список шагов всегда будет неочевидным для другого человека. мы все даже шнурки по разному завязываем -->
-	</section>
-
-	<section class="slide">
-		<h2>Imperative Programming</h2>
-
-		<ul>
-			<li><span class="primary-accent">Хрупкая</span> структура кода</li>
-			<li class="next">Часто не консистентные термины</li>
-			<li class="next">Слишком много свободы</li>
-			<li class="next">Привет, инкрементальный <span class="secondary-accent">дебаг</span></li>
-		</ul>
-	</section>
-
-	<section class="slide cover"><img src="pictures/debug-atkinson.gif" class="cover w"></section>
-
-	<!-- накрылось красной маздой -->
 	<section class="slide cover"><img src="pictures/wtf.jpg" class="cover w"></section>
 
 	<section class="slide">
-		<h2 class="shout lambda">λ</h2>
+		<h2>Code Style Guide Goals</h2>
+
+		<ul>
+			<li>Consistency</li>
+			<li>Readability</li>
+			<li>Enforceability</li>
+		</ul>
+
+		<p class="note">Thanks David for a good presentation and ideas</p>
 	</section>
 
 	<section class="slide">
-		<h2>Declarative Programming</h2>
+		<h2 class="shout"><span class="primary-accent">ES6</span> is coming!</h2>
+	</section>
+
+	<section class="slide cover"><img src="pictures/morning-after.jpg" class="cover w"></section>
+
+	<section class="slide">
+		<h2 class="shout"><a href="http://eslint.org/">ESLint</a> to the rescue!</h2>
+	</section>
+
+	<section class="slide">
+		<h2 class="shout snippet"><code><span class="primary-accent">ESLint</span> &gt; JSHint</code></h2>
+	</section>
+
+	<section class="slide">
+		<h2>ESLint</h2>
 
 		<ul>
-			<li>Вы описываете результат</li>
-			<li>Отсутствует понятие времени</li>
+			<li>Full <span class="primary-accent">ES6</span> support (thanks, <span class="secondary-accent">Babel</span>)</li>
+			<li>Big set of rules and ability to write your own (it's not difficult)</li>
+			<li>Awesome pluggability (all rules are standalone)</li>
 		</ul>
 	</section>
 
 	<section class="slide">
-		<h2>Declarative Programming</h2>
-
-		<ul>
-			<li>Денотационная <span class="primary-accent">семантика</span></li>
-			<li>Объекты первого класса</li>
-			<li>Композиция чистых <span class="secondary-accent">функций</span></li>
-		</ul>
+		<h2 class="shout"><a href="https://github.com/airbnb/javascript"><span class="secondary-accent">Airbnb</span> JavaScript<br>Style Guide</a><small>A mostly reasonable approach to JavaScript</small></h2>
 	</section>
 
 	<section class="slide cover"><img src="pictures/hide.jpg" class="cover w"></section>
 
-	<section class="slide">
-		<h2 class="shout">Денотационная семантика</h2>
-	</section>
+	<section class="slide"><img src="pictures/js-guide.png" class="screenshot place"></section>
 
 	<section class="slide">
-		<h2>Денотационная семантика</h2>
+		<h2>Why Airbnb Style Guide</h2>
 
 		<ul>
-			<li><strong class="primary-accent">Программа</strong> &mdash; это функция, преобразующая входные <span class="primary-accent">данные</span> в выходные</li>
-			<li>Математика веками оттачивала такой способ «исполнения программ», называя его «<span class="secondary-accent">применением функций</span>»</li>
+			<li>Widely popular in Front End <span class="primary-accent">community</span></li>
+			<li>Easy to start with for <span class="secondary-accent">new team members</span></li>
+			<li>Based on experience of hundreds developers</li>
 		</ul>
 	</section>
 
 	<section class="slide">
-		<h2>Циклы? А нужно ли?</h2>
-
-		<ul>
-			<li>Какова конечная <span class="primary-accent">цель</span> использования цикла?</li>
-			<li>Можем ли мы получить <span class="secondary-accent">результат</span> прямо сейчас?</li>
-		</ul>
-
-		<p><a href="http://www.cl.cam.ac.uk/~gw104/dens.pdf">Glynn Winskel: Lecture Notes on Denotational Semantics</a></p>
-	</section>
-
-	<section class="slide">
-		<h2>Рекурсия!</h2>
-
-		<ul>
-			<li>Представление <span class="primary-accent">результата</span>, а не последовательности <span class="secondary-accent">действий</span></li>
-			<li class="next">Требует понимания термина <strong class="primary-accent">рекурсия</strong></li>
-		</ul>
-	</section>
-
-	<section class="slide">
-		<h2 class="shout">Why? <br>For the <span class="primary-accent">Glory</span> <br>of <span class="secondary-accent">Satan</span>, of course!</h2>
-	</section>
-
-	<section class="slide">
-		<h2>First-class citizens</h2>
-
-		<p><strong class="primary-accent">Сущность</strong>, которая может быть передана как параметр, возвращена как <strong class="secondary-accent">результат функции</strong> или присвоена <strong class="secondary-accent">переменной</strong>.</p>
-
-		<p class="next">Это то, что вы можете представить в <span class="primary-accent">материальном виде</span>, атомарно, а не как последовательность <span class="secondary-accent">действий</span>.</p>
-	</section>
-
-	<section class="slide">
-		<h2>Присвоение переменной</h2>
-
-		<pre>
-			<code>var <strong class="primary-accent">result</strong> = function() {</code>
-			<code>  return <strong class="secondary-accent">13</strong>;</code>
-			<code>};</code>
-		</pre>
-	</section>
-
-	<section class="slide">
-		<h2>Передача как параметра</h2>
-
-		<pre>
-			<code><span class="primary-accent">[1, 2, 3]</span>.<mark>map</mark>(function(number) {</code>
-			<code>  return <strong class="secondary-accent">number * 2</strong>;</code>
-			<code>});</code>
-		</pre>
-	</section>
-
-	<section class="slide">
-		<h2>Функция как результат</h2>
-
-		<pre>
-			<code>function <mark>counter</mark>(start) {</code>
-			<code>  return <strong class="primary-accent">function()</strong> {</code>
-			<code>    return <strong class="secondary-accent">start++</strong>;</code>
-			<code>  };</code>
-			<code>}</code>
-		</pre>
-	</section>
-
-	<section class="slide install">
-		<h2 class="shout"><code>1 + (2 + (3 + <strong class="primary-accent">x</strong>))</code></h2>
-	</section>
-
-	<section class="slide install">
-		<h2 class="shout"><code>state</code></h2>
-	</section>
-
-	<section class="slide install">
-		<h2 class="shout"><code>action <span class="primary-accent">&#8658;</span> state</code></h2>
-	</section>
-
-	<section class="slide install">
-		<h2 class="shout"><code>newState(<strong class="primary-accent">action</strong>, <strong class="secondary-accent">state</strong>)</code></h2>
-	</section>
-
-	<section class="slide install">
-		<h2 class="shout"><code>(action <span class="primary-accent">&#8658;</span> state)</code></h2>
-	</section>
-
-	<section class="slide install">
-		<h2 class="shout"><code>action &#8658; (action <span class="primary-accent">&#8658;</span> state)</code></h2>
-	</section>
-
-	<section class="slide install">
-		<h2 class="shout"><code>...</code></h2>
-	</section>
-
-	<section class="slide install">
-		<h2 class="shout"><code>ƒ(<strong class="primary-accent">action</strong>, <strong class="secondary-accent">state</strong>) = <strong class="secondary-accent">state</strong></code></h2>
-	</section>
-
-	<section class="slide install">
-		<h2 class="shout"><code>Actions.<mark>reduce</mark>(<strong class="primary-accent">...</strong>);</code></h2>
-	</section>
-
-	<section class="slide">
-		<div>
-			<h2>Всё вместе</h2>
-
-			<pre>
-				<code>render = (Data) => UI;</code>
-				<code class="next">update = (<strong class="secondary-accent">State</strong>, <strong class="primary-accent">Action</strong>) => <strong class="secondary-accent">NewState</strong>;</code>
-			</pre>
-
-			<pre>
-				<code class="next">Actions = [<strong class="primary-accent">Update</strong> This, <strong class="primary-accent">Add</strong> That, <strong class="primary-accent">Delete</strong> Shit, ...];</code>
-				<code class="next"><mark>AppState</mark> = Actions.<mark class="important">reduce</mark>(update, InitialState);</code>
-				<code class="next">AppState.subscribe(<mark>render</mark>);</code>
-			</pre>
-		</div>
-	</section>
-
-	<section class="slide">
-		<h2 class="shout">Монады</h2>
-	</section>
-
-	<section class="slide cover"><img src="pictures/omg.jpg" class="cover w"></section>
-
-	<section class="slide">
-		<h2>Монады</h2>
-		<ul>
-			<li>Не так страшны как их рисуют</li>
-			<li>Очень эффективны если правильно применять</li>
-			<li>Необходимо пройти <em class="primary-accent">путь монаха</em></li>
-		</ul>
-	</section>
-
-	<section class="slide"><img src="pictures/bear-thoughts.jpg" class="place top"></section>
-
-	<section class="slide">
-		<h2 class="shout"><span class="primary-accent">Монады</span> и Композиция</h2>
-	</section>
-
-	<section class="slide">
-		<h2 class="shout"><span class="secondary-accent">Композиция</span>++</h2>
-	</section>
-
-	<section class="slide"><img src="pictures/holy.jpg" class="place top"></section>
-
-	<section class="slide">
-		<h2>Монады</h2>
-
-		<ul>
-			<li>Структура данных</li>
-			<li>Сокрытие <strong class="primary-accent">побочных эффектов</strong></li>
-			<li>Цепочка <span class="primary-accent">композиции</span> функций</li>
-			<li>Гибкое управление <span class="secondary-accent">поведением</span></li>
-		</ul>
-
-		<p><a href="http://fsharpforfunandprofit.com/posts/recipe-part2/">Railway Oriented Programming</a></p>
-	</section>
-
-	<section class="slide">
-		<h2 class="shout"><span class="primary-accent">fetch</span> vs XMLHttp<span class="secondary-accent">Request</span></h2>
-	</section>
-
-	<section class="slide">
-		<h2>Promise</h2>
-
-		<p>Асинхронная <strong class="primary-accent">работа</strong> как <span class="secondary-accent">first-class</span> citizen</p>
-
-		<pre>
-			<code class="next">var <strong class="primary-accent">users</strong> = <mark>fetch</mark>("/users");</code>
-			<code class="next">var updatedUsers = <strong class="primary-accent">users</strong>.then(<strong class="secondary-accent">fn</strong>);</code>
-		</pre>
-	</section>
-
-	<section class="slide">
-		<h2>Observable</h2>
-
-		<pre>
-			<code>var <strong class="primary-accent">clicks</strong> = Observable.fromEvent(element, <mark>"click"</mark>);</code>
-			<code class="next">var coords = <strong class="primary-accent">clicks</strong>.<mark>map</mark>(event => event.<strong class="secondary-accent">pageX</strong>);</code>
-			<code class="next">coords.forEach(x => console.log(<strong class="secondary-accent">x</strong>));</code>
-		</pre>
-	</section>
-
-	<section class="slide">
-		<h2 class="shout"><a href="https://github.com/alexeyraspopov/dgelong">Dgelong</a></h2>
-	</section>
-
-	<section class="slide install">
-		<h2 class="shout">
-			<code>npm i <span class="primary-accent">dgelong</span></code>
+		<h2 class="shout snippet">
+			<code>eslint-config-<span class="primary-accent">airbnb</span></code>
 		</h2>
 	</section>
 
 	<section class="slide">
-		<h2>Dgelong</h2>
-
-		<ol>
-			<li>Потому что я <em>не хочу</em> подключать комбайн с вайфаем если мне нужно написать всего одну строчку кода</li>
-			<li class="next">Мне не нужна докторская степень в математике чтобы вывести “Hello World” на экран</li>
-			<li class="next"><span class="primary-accent">API</span> должен быть близким к нативному</li>
-			<li class="next"><span class="secondary-accent">Документация</span> не должна издаваться в двух томах</li>
-			<li class="next">Имплементация библиотеки не должна гадить в стектрейс</li>
-			<li class="next">For <span class="secondary-accent">fun</span> and profit</li>
-		</ol>
+		<h2 class="shout snippet">
+			<code>grunt <span class="primary-accent">lint</span></code>
+		</h2>
 	</section>
 
 	<section class="slide">
-		<h2>Пример</h2>
-
-		<pre>
-			<code>function validateInput(<mark>username</mark>) {</code>
-			<code>  if (username !== "boring_wozniak") {</code>
-			<code>    return <strong class="primary-accent">Success</strong>(username);</code>
-			<code>  }</code>
-			<code>  return <strong class="secondary-accent">Failure</strong>("Steve Wozniak isn't boring");</code>
-			<code>}</code>
-		</pre>
-
-		<p class="note"><strong>Неуспех</strong> как first-class citizen</p>
+		<h2 class="shout"><span class="primary-accent">Highlights</span></h2>
 	</section>
 
-	<section class="slide">
-		<h2>Реальный пример</h2>
+	<!-- trailing comma -->
+	<section class="slide"><img src="pictures/holy.jpg" class="place top"></section>
 
-		<pre>
-			<code>return <strong class="primary-accent">Maybe</strong>(prediction)</code>
-			<code>  .bind(predictionValue)</code>
-			<code>  .bind(fixedResult)</code>
-			<code>  .bind(formattedResult)</code>
-			<code>  .<span class="secondary-accent">lift</span>(PredictionResult, Spinner);</code>
-		</pre>
+	<!-- let, const -->
+	<section class="slide cover"><img src="pictures/omg.jpg" class="cover w"></section>
 
-		<p class="note">Никакой вложенной композиции, полная независимость функций.</p>
-	</section>
+	<!-- one-var -->
+
+	<section class="slide"><img src="pictures/eslint-pr.png" class="screenshot place"></section>
 
 	<section class="slide">
-		<h2><del>Криминальное</del> Чтиво</h2>
+		<h2>Next steps</h2>
 
 		<ul>
-			<li><a href="http://www.usingcsp.com/cspbook.pdf">C. A. R. Hoare: Communicating Sequential Processes</a></li>
-			<li><a href="http://www.cl.cam.ac.uk/~gw104/dens.pdf">Glynn Winskel: Lecture Notes on Denotational Semantics</a></li>
-			<li><a href="http://fsharpforfunandprofit.com/posts/recipe-part2/">Railway Oriented Programming</a></li>
-		</ul>
-
-		<ul>
-			<li><a href="https://github.com/alexeyraspopov/dgelong">alexeyraspopov/dgelong</a></li>
-			<li><a href="https://github.com/kriskowal/gtor">kriskowal/gtor</a></li>
+			<li>Refactor <em class="primary-accent">whole</em> codebase (step by step)</li>
+			<li>Keep code <span class="primary-accent">clean</span>, simple and consistent</li>
+			<li>Write new code with new <span class="secondary-accent">rules</span></li>
 		</ul>
 	</section>
 
+	<section class="slide">
+		<h2 class="shout"><a href="https://github.com/roadhump/SublimeLinter-eslint">sublime-eslint</a></h2>
+	</section>
+
+	<section class="slide cover"><img src="pictures/asleep.jpg" class="cover w"></section>
 	<section class="slide cover"><img src="pictures/thanks.jpg" class="cover w"></section>
-
-	<section class="slide">
-		<h2>Спасибо!</h2>
-
-		<ul>
-			<li><a href="https://github.com/alexeyraspopov">github.com/alexeyraspopov</a></li>
-			<li><a href="https://twitter.com/alexeyraspopov">twitter.com/alexeyraspopov</a></li>
-		</ul>
-
-		<p>Ссылка на слайды &mdash; <a href="https://alexeyraspopov.github.io/talks/first-class-programming">alexeyraspopov.github.io/talks/first-class-programming</a></p>
-	</section>
 
 	<div class="progress"></div>
 	<footer class="badge">
