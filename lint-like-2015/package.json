@@ -1,0 +1,15 @@
+{
+  "name": "first-class-programming",
+  "version": "1.0.0",
+  "description": "First-class programming",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexey Raspopov",
+  "license": "MIT",
+  "dependencies": {
+    "shower-core": "git://github.com/shower/core.git#dev",
+    "shower-ribbon": "git://github.com/shower/ribbon.git#next"
+  }
+}
